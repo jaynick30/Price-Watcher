@@ -8,8 +8,11 @@ import java.net.URL;
 
 public class Parser {
 
-    private String priceText="";
-    private char endPriceChar='/';
+    private String priceText = "";
+    private char startPriceChar = '/';
+    private char endLineChar = '/';
+    private String titleText = "";
+    private char startTitleChar = '/';
 
     public Parser(Website site) {
         setSite(site);
@@ -27,6 +30,9 @@ public class Parser {
                 if (line.contains(priceText)) {
                     System.out.println(getPriceFromLine(line));
                 }
+                else if (line.contains(titleText)) {
+                    System.out.println(getTitleFromLine(line));
+                }
             }
             in.close();
         }
@@ -39,22 +45,31 @@ public class Parser {
     }
 
     private String getPriceFromLine(String s) {
-        for (int i=0; i<s.length(); i++) {
-            if (s.charAt(i) == '$') {
-                return getPrice(s,i);
-            }
-        }
-        return "no price in line";
+        return iterateLine(s, startPriceChar);
     }
 
-    private String getPrice(String s, int i) {
-        String price = "";
+    private String getTitleFromLine(String s) {
+        return iterateLine(s, startTitleChar);
+    }
+
+    private String iterateLine(String s, char startChar) {
+        for (int i=0; i<s.length(); i++) {
+            if (s.charAt(i) == startChar) {
+                return getEndOfString(s, i);
+            }
+        }
+        return "information not in line";
+    }
+
+    private String getEndOfString(String s, int i) {
+        String newStr = "";
+        i++;
         char currentChar = s.charAt(i++);
-        while (currentChar != endPriceChar) {
-            price +=currentChar;
+        while (currentChar != endLineChar) {
+            newStr += currentChar;
             currentChar = s.charAt(i++);
         }
-        return price;
+        return newStr;
     }
 
     private void setSite(Website site) {
@@ -65,6 +80,9 @@ public class Parser {
 
     private void amazonStringParsing() {
         priceText = "span id="+'"'+"priceblock_ourprice";
-        endPriceChar = '<';
+        startPriceChar = '$';
+        endLineChar = '<';
+        titleText = "span id="+'"'+"productTitle";
+        startTitleChar = '>';
     }
 }
