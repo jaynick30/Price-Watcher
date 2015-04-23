@@ -1,0 +1,1 @@
+INSERT INTO Items VALUES (#name#, #price#, #includeShipping#, #url#, #timeStamp#)
