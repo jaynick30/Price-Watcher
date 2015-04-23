@@ -1,37 +1,49 @@
 package URL;
 
+import model.Item;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Parser {
 
-    private String priceText = "";
-    private char startPriceChar = '/';
-    private char endLineChar = '/';
-    private String titleText = "";
-    private char startTitleChar = '/';
+    private String priceText;
+    private String shippingText;
+    private String freeShippingText;
+    private String titleText;
+    private char startPriceChar;
+    private char endLineChar;
+    private char startTitleChar;
 
     public Parser(Website site) {
         setSite(site);
     }
 
-    public void parse(String url) {
+    public Item parse(String url) {
+        Item item = new Item(url);
         try {
             URL site = new URL(url);
-            InputStreamReader reader = new InputStreamReader(site.openStream());
+            HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
+            httpCon.connect();
+            InputStreamReader reader = new InputStreamReader((InputStream) httpCon.getContent());
             BufferedReader in = new BufferedReader(reader);
             String line;
             while(true) {
                 line = in.readLine();
                 if (line == null) {break;}
                 if (line.contains(priceText)) {
-                    System.out.println(getPriceFromLine(line));
+                    item.price = getPriceFromLine(line);
                 }
                 else if (line.contains(titleText)) {
-                    System.out.println(getTitleFromLine(line));
+                    item.title = getTitleFromLine(line);
+                }
+                else if (line.contains(shippingText)) {
+                    item.shipping = getShipping(line);
                 }
             }
             in.close();
@@ -42,6 +54,7 @@ public class Parser {
         catch (IOException e) {
             e.printStackTrace();
         }
+        return item;
     }
 
     private String getPriceFromLine(String s) {
@@ -50,6 +63,12 @@ public class Parser {
 
     private String getTitleFromLine(String s) {
         return iterateLine(s, startTitleChar);
+    }
+
+    private boolean getShipping(String s) {
+        System.out.println(s);
+        if (s.contains(freeShippingText)) {return true;}
+        return false;
     }
 
     private String iterateLine(String s, char startChar) {
@@ -69,7 +88,12 @@ public class Parser {
             newStr += currentChar;
             currentChar = s.charAt(i++);
         }
-        return newStr;
+        return manageString(newStr);
+    }
+
+    private String manageString(String s) {
+        s.replace("&quot",""+'"');
+        return s;
     }
 
     private void setSite(Website site) {
@@ -79,10 +103,12 @@ public class Parser {
     }
 
     private void amazonStringParsing() {
-        priceText = "span id="+'"'+"priceblock_ourprice";
+        priceText = "span id="+'"'+"priceblock_ourprice";//TODO check \
         startPriceChar = '$';
         endLineChar = '<';
         titleText = "span id="+'"'+"productTitle";
         startTitleChar = '>';
+        shippingText = "id=\"ourprice_shippingmessage";
+        freeShippingText = "FREE Shipping";
     }
 }
