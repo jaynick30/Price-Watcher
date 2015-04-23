@@ -20,7 +20,9 @@ public class Parser {
             while(true) {
                 line = in.readLine();
                 if (line == null) {break;}
-                System.out.println(line);
+                if (line.contains("span id="+'"'+"priceblock_ourprice")) {
+                    System.out.println(getPriceFromLine(line));
+                }
             }
             in.close();
         }
@@ -30,5 +32,24 @@ public class Parser {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getPriceFromLine(String s) {
+        for (int i=0; i<s.length(); i++) {
+            if (s.charAt(i) == '$') {
+                return getPrice(s,i);
+            }
+        }
+        return "no price in line";
+    }
+
+    private String getPrice(String s, int i) {
+        String price = "";
+        char currentChar = s.charAt(i++);
+        while (currentChar != '<') {
+            price +=currentChar;
+            currentChar = s.charAt(i++);
+        }
+        return price;
     }
 }
