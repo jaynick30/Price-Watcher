@@ -8,7 +8,11 @@ import java.net.URL;
 
 public class Parser {
 
-    public Parser() {
+    private String priceText="";
+    private char endPriceChar='/';
+
+    public Parser(Website site) {
+        setSite(site);
     }
 
     public void parse(String url) {
@@ -20,7 +24,7 @@ public class Parser {
             while(true) {
                 line = in.readLine();
                 if (line == null) {break;}
-                if (line.contains("span id="+'"'+"priceblock_ourprice")) {
+                if (line.contains(priceText)) {
                     System.out.println(getPriceFromLine(line));
                 }
             }
@@ -46,10 +50,21 @@ public class Parser {
     private String getPrice(String s, int i) {
         String price = "";
         char currentChar = s.charAt(i++);
-        while (currentChar != '<') {
+        while (currentChar != endPriceChar) {
             price +=currentChar;
             currentChar = s.charAt(i++);
         }
         return price;
+    }
+
+    private void setSite(Website site) {
+        if (site.equals(Website.AMAZON)) {
+            amazonStringParsing();
+        }
+    }
+
+    private void amazonStringParsing() {
+        priceText = "span id="+'"'+"priceblock_ourprice";
+        endPriceChar = '<';
     }
 }
