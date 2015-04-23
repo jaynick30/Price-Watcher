@@ -1,8 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="0.0" prefWidth="644.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ComboBox fx:id="categorySelection" layoutX="39.0" layoutY="3.0" prefHeight="25.0" prefWidth="135.0" promptText="Set Category" />
+            <Button fx:id="addCategory" layoutX="4.0" layoutY="3.0" mnemonicParsing="false" text="+" textFill="#1f43f8">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <ScrollPane layoutY="31.0" prefHeight="340.0" prefWidth="644.0">
+               <content>
+                  <HBox prefHeight="338.0" prefWidth="640.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="215.0">
+                           <children>
+                              <Button fx:id="nameButton" mnemonicParsing="false" prefWidth="215.0" text="Product Name" />
+                              <ListView fx:id="products" prefHeight="315.0" prefWidth="215.0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="215.0">
+                           <children>
+                              <Button fx:id="priceButton" mnemonicParsing="false" prefWidth="215.0" text="Price" />
+                              <ListView fx:id="prices" prefHeight="315.0" prefWidth="215.0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="215.0">
+                           <children>
+                              <Button fx:id="siteButton" mnemonicParsing="false" prefWidth="215.0" text="Site" />
+                              <ListView fx:id="sites" prefHeight="315.0" prefWidth="215.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+            <Button fx:id="addURL" layoutX="190.0" layoutY="3.0" mnemonicParsing="false" text="Add" textFill="#2545e4">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <TextField fx:id="urlTextField" layoutX="244.0" layoutY="4.0" promptText="Add URL here..." />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
