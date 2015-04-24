@@ -1,11 +1,8 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import model.Item;
+
+import java.sql.*;
 
 public class Manager {
 
@@ -34,10 +31,10 @@ public class Manager {
 	public ResultSet getItem(Item item) {
 		String query = "SELECT * FROM" + table + "WHERE name = " + item.title;
 		try{
-			return statement.execute(query);
+			return statement.executeQuery(query);
 		}catch (SQLException e) {
 			errorMessage = "unable to find item";
 		}
-		return
+		return null;
 	}
 }

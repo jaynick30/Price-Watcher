@@ -6,16 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -71,7 +65,7 @@ public class Controller {
              
                  final WebView browser = new WebView();
         	     final WebEngine webEngine = browser.getEngine();
-                 webEngine.load(url);
+                 //webEngine.load(url);
                  
                  vbox.getChildren().add(browser);
                  VBox.setVgrow(browser, Priority.ALWAYS);

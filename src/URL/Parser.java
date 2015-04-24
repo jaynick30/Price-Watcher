@@ -20,11 +20,10 @@ public class Parser {
     private char endLineChar;
     private char startTitleChar;
 
-    public Parser(Website site) {
-        setSite(site);
-    }
+    public Parser() {}
 
     public Item parse(String url) {
+        setSite(Website.getSite(url));
         Item item = new Item(url);
         try {
             URL site = new URL(url);
@@ -43,6 +42,8 @@ public class Parser {
                     item.title = getTitleFromLine(line);
                 }
                 else if (line.contains(shippingText)) {
+                    System.out.println(line);
+                    for (int i=0; i<10; i++) {line = in.readLine(); System.out.println(line);}
                     item.shipping = getShipping(line);
                 }
             }
