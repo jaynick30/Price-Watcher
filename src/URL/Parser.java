@@ -7,18 +7,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Parser {
 
-    private String priceText;
+    private String normalPriceText;
+    private String otherPriceText;
+    private String blockPriceText;
     private String shippingText;
     private String freeShippingText;
     private String titleText;
     private char startPriceChar;
     private char endLineChar;
     private char startTitleChar;
+    private int siteShippingSpacing;
 
     public Parser() {}
 
@@ -26,31 +28,28 @@ public class Parser {
         setSite(Website.getSite(url));
         Item item = new Item(url);
         try {
-            URL site = new URL(url);
-            HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
-            httpCon.connect();
-            InputStreamReader reader = new InputStreamReader((InputStream) httpCon.getContent());
-            BufferedReader in = new BufferedReader(reader);
+            BufferedReader in = connectToSite(url);
             String line;
             while(true) {
                 line = in.readLine();
-                //System.out.println(line);
                 if (line == null) {break;}
-                if (line.contains(priceText)) {
-                    item.price = getPriceFromLine(line);
+                else if (!item.hasPrice()) {
+                    if (hasPriceText(line)) {
+                        item.price = getPriceFromLine(line);
+                    }
                 }
-                else if (line.contains(titleText)) {
-                    item.title = getTitleFromLine(line);
+                else if (!item.hasTitle()) {
+                    if (hasTitleText(line)) {
+                        System.out.println(line);
+                        item.title = getTitleFromLine(line);
+                    }
                 }
                 else if (line.contains(shippingText)) {
-                    for (int i=0; i<17; i++) {line = in.readLine();}
+                    for (int i=0; i<siteShippingSpacing; i++) {line = in.readLine();}
                     item.shipping = getShipping(line);
                 }
             }
             in.close();
-        }
-        catch (MalformedURLException e) {
-            e.printStackTrace();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -103,12 +102,36 @@ public class Parser {
     }
 
     private void amazonStringParsing() {
-        priceText = "span id="+'"'+"priceblock_ourprice";//TODO check \
+        normalPriceText = "span id=\"priceblock_ourprice";
+        otherPriceText = "class=\"priceLarge";
+        blockPriceText = "a-color-price offer-price";
         startPriceChar = '$';
         endLineChar = '<';
         titleText = "span id="+'"'+"productTitle";
         startTitleChar = '>';
         shippingText = "id=\"ourprice_shippingmessage";
         freeShippingText = "FREE Shipping";
+        siteShippingSpacing = 17;
+    }
+
+    private BufferedReader connectToSite(String url) {
+        try {
+            URL site = new URL(url);
+            HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
+            httpCon.connect();
+            InputStreamReader reader = new InputStreamReader((InputStream) httpCon.getContent());
+            return new BufferedReader(reader);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private boolean hasPriceText(String line) {
+        return line.contains(normalPriceText) || line.contains(otherPriceText) || line.contains(blockPriceText);
+    }
+    private boolean hasTitleText(String line) {
+        return line.contains(titleText);
     }
 }
