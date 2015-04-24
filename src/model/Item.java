@@ -10,4 +10,7 @@ public class Item {
     public Item(String url) {
         this.url = url;
     }
+
+    public boolean hasPrice() {return price!=null;}
+    public boolean hasTitle() {return title!=null;}
 }
