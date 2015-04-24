@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javafx.scene.control.Hyperlink;
+
 public class Parser {
 
     private String priceText;
@@ -20,12 +22,12 @@ public class Parser {
     private char endLineChar;
     private char startTitleChar;
 
-    public Parser(Website site) {
-        setSite(site);
+    public Parser() {
+    	amazonStringParsing();
     }
 
     public Item parse(String url) {
-        Item item = new Item(url);
+        Item item = new Item();
         try {
             URL site = new URL(url);
             HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
@@ -94,12 +96,6 @@ public class Parser {
     private String manageString(String s) {
         s.replace("&quot",""+'"');
         return s;
-    }
-
-    private void setSite(Website site) {
-        if (site.equals(Website.AMAZON)) {
-            amazonStringParsing();
-        }
     }
 
     private void amazonStringParsing() {

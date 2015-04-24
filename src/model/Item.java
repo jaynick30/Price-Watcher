@@ -7,7 +7,7 @@ public class Item {
     public boolean shipping;//true == free shipping
 
 
-    public Item(String url) {
-        this.url = url;
+    public Item() {
+    	
     }
 }
