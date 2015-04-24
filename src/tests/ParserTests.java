@@ -20,7 +20,7 @@ public class ParserTests {
         System.out.println(item.shipping);
         assertEquals(item.price, testPrice);
         assertEquals(item.title, testTitle);
-        assertTrue(item.shipping);
+        assertTrue(item.shipping == "1");
         assertTrue(item.hasPrice());
         assertTrue(item.hasTitle());
     }

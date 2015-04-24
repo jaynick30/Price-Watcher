@@ -22,21 +22,11 @@ public class Parser {
     private char endLineChar;
     private char startTitleChar;
 
-<<<<<<< HEAD
-    public Parser() {
-    	amazonStringParsing();
-    }
-=======
     public Parser() {}
->>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 
     public Item parse(String url) {
-<<<<<<< HEAD
-        Item item = new Item();
-=======
         setSite(Website.getSite(url));
         Item item = new Item(url);
->>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
         try {
             URL site = new URL(url);
             HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
@@ -78,9 +68,10 @@ public class Parser {
         return iterateLine(s, startTitleChar);
     }
 
-    private boolean getShipping(String s) {
-        if (s.contains(freeShippingText)) {return true;}
-        return false;
+    private String getShipping(String s) {
+        System.out.println(s);
+        if (s.contains(freeShippingText)) {return "1";}
+        return "0";
     }
 
     private String iterateLine(String s, char startChar) {
@@ -104,10 +95,6 @@ public class Parser {
     }
 
     private String manageString(String s) {
-<<<<<<< HEAD
-        s.replace("&quot",""+'"');
-        return s;
-=======
         return s.replace("&quot;",""+'"');
 
     }
@@ -116,7 +103,6 @@ public class Parser {
         if (site.equals(Website.AMAZON)) {
             amazonStringParsing();
         }
->>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
     }
 
     private void amazonStringParsing() {

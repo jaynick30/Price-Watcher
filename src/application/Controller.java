@@ -91,7 +91,7 @@ public class Controller {
 		String url = urlTextField.getText();
 		hyper = createHyperlink(url);
 		Parser parser = new Parser();
-		Item item = new Item();
+		Item item = new Item(url);
 		
 		item = parser.parse(url);
 		String newProduct = item.title;
