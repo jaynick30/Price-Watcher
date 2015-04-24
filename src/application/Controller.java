@@ -1,8 +1,6 @@
 package application;
 
-import model.Item;
 import URL.Parser;
-import URL.Website;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import model.Item;
 
 public class Controller {
 	@FXML
@@ -104,7 +103,7 @@ public class Controller {
 		
 	}
 	
-	private Hyperlink createHyperlink(String url){
+	private Hyperlink createHyperlink(final String url){
 		Hyperlink hyper = new Hyperlink();
 		 hyper.setText(url);
 		 hyper.setOnAction(new EventHandler<ActionEvent>() {

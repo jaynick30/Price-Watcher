@@ -4,24 +4,23 @@ import model.Item;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import javafx.scene.control.Hyperlink;
 
 public class Parser {
 
+    private URLConnector connector = new URLConnector();
     private String normalPriceText;
     private String otherPriceText;
     private String blockPriceText;
     private String shippingText;
     private String freeShippingText;
-    private String titleText;
+    private String normalTitleText;
+    private String altTitleText;
+    private String altStartTitleStr;
     private char startPriceChar;
-    private char endLineChar;
     private char startTitleChar;
+    private char endTitleChar;
+    private char endPriceChar;
+    private char altEndTitleChar;
     private int siteShippingSpacing;
 
     public Parser() {}
@@ -41,9 +40,15 @@ public class Parser {
                     }
                 }
                 else if (!item.hasTitle()) {
-                    if (hasTitleText(line)) {
+                    System.out.println(line);
+                    if (hasNormalTitleText(line)) {
                         System.out.println(line);
+                        System.out.println("1");
                         item.title = getTitleFromLine(line);
+                    } else if (hasAltTitleText(line)) {
+                        System.out.println(line);
+                        System.out.println("2");
+                        item.title = getTitleFromAltLine(line);
                     }
                 }
                 else if (line.contains(shippingText)) {
@@ -60,12 +65,14 @@ public class Parser {
     }
 
     private String getPriceFromLine(String s) {
-        return iterateLine(s, startPriceChar);
+        return iterateLine(s, startPriceChar, endPriceChar);
     }
 
     private String getTitleFromLine(String s) {
-        return iterateLine(s, startTitleChar);
+        return iterateLine(s, startTitleChar, endTitleChar);
     }
+
+    private String getTitleFromAltLine(String s) { return iterateAltLine(s, altStartTitleStr);}
 
     private String getShipping(String s) {
         System.out.println(s);
@@ -73,20 +80,25 @@ public class Parser {
         return "0";
     }
 
-    private String iterateLine(String s, char startChar) {
+    private String iterateAltLine(String s, String start) {
+        String[] strings=s.split(start);
+        return getEndOfString(strings[1],0, altEndTitleChar);
+    }
+
+    private String iterateLine(String s, char startChar, char endChar) {
         for (int i=0; i<s.length(); i++) {
             if (s.charAt(i) == startChar) {
-                return getEndOfString(s, i);
+                return getEndOfString(s, i, endChar);
             }
         }
         return "information not in line";
     }
 
-    private String getEndOfString(String s, int i) {
+    private String getEndOfString(String s, int i, char endChar) {
         if (s.charAt(i) != '$') {i++;}
         String newStr = "";
         char currentChar = s.charAt(i++);
-        while (currentChar != endLineChar) {
+        while (currentChar != endChar) {
             newStr += currentChar;
             currentChar = s.charAt(i++);
         }
@@ -109,32 +121,29 @@ public class Parser {
         otherPriceText = "class=\"priceLarge";
         blockPriceText = "a-color-price offer-price";
         startPriceChar = '$';
-        endLineChar = '<';
-        titleText = "span id="+'"'+"productTitle";
+        endPriceChar = '<';
+        endTitleChar = '<';
+        altEndTitleChar = '\'';
+        normalTitleText = "span id=\"productTitle";
+        altTitleText = "title:";
         startTitleChar = '>';
+        altStartTitleStr = "title: '";
         shippingText = "id=\"ourprice_shippingmessage";
         freeShippingText = "FREE Shipping";
         siteShippingSpacing = 17;
     }
 
     private BufferedReader connectToSite(String url) {
-        try {
-            URL site = new URL(url);
-            HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
-            httpCon.connect();
-            InputStreamReader reader = new InputStreamReader((InputStream) httpCon.getContent());
-            return new BufferedReader(reader);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return connector.connect(url);
     }
 
     private boolean hasPriceText(String line) {
         return line.contains(normalPriceText) || line.contains(otherPriceText) || line.contains(blockPriceText);
     }
-    private boolean hasTitleText(String line) {
-        return line.contains(titleText);
+    private boolean hasNormalTitleText(String line) {
+        return line.contains(normalTitleText);
+    }
+    private boolean hasAltTitleText(String line) {
+        return line.contains(altTitleText);
     }
 }

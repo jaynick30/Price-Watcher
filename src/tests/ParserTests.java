@@ -4,6 +4,9 @@ import URL.Parser;
 import model.Item;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class ParserTests {
     private Parser parser = new Parser();
     private Item item;
@@ -11,8 +14,9 @@ public class ParserTests {
     private String testPrice = "$199.00";
     private String testTitle = "Kindle Voyage, 6\" High-Resolution Display (300 ppi) with Adaptive Built-in Light, PagePress Sensors, Wi-Fi - Includes Special Offers";
     private String testBookURL = "http://www.amazon.com/Memory-Amos-Decker-David-Baldacci/dp/1455559822/ref=sr_1_1?s=books&ie=UTF8&qid=1429838562&sr=1-1&keywords=book";
+    private String testGameURL = "http://www.amazon.com/Bloodborne-PlayStation-4/dp/B00KVR4HEC/ref=sr_1_1?ie=UTF8&qid=1429839651&sr=8-1&keywords=bloodborne";
 
-    /*@Test
+    @Test
     public void testPrint() {
         item = parser.parse(testURL);
         assertEquals(item.price, testPrice);
@@ -20,11 +24,17 @@ public class ParserTests {
         assertTrue(item.shipping == "1");
         assertTrue(item.hasPrice());
         assertTrue(item.hasTitle());
-    }*/
+    }
 
     @Test
     public void testBookURL() {
         item = parser.parse(testBookURL);
+        printItemValues(item);
+    }
+
+    @Test
+    public void testGameURL() {
+        item = parser.parse(testGameURL);
         printItemValues(item);
     }
 
