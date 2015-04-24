@@ -4,6 +4,9 @@ import URL.Parser;
 import model.Item;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class ParserTests {
     private Parser parser = new Parser();
     private Item item;
@@ -15,6 +18,10 @@ public class ParserTests {
     public void testPrint() {
         item = parser.parse(testURL);
         System.out.println(item.shipping);
-        //assertEquals(item.price, )
+        assertEquals(item.price, testPrice);
+        assertEquals(item.title, testTitle);
+        assertTrue(item.shipping);
+        assertTrue(item.hasPrice());
+        assertTrue(item.hasTitle());
     }
 }
