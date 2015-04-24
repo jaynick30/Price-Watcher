@@ -1,5 +1,8 @@
 package application;
 
+import model.Item;
+import URL.Parser;
+import URL.Website;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,6 +51,10 @@ public class Controller {
 		 prices.setItems(priceList);
 		 sites.setItems(siteList);
 		 
+		 products.setFixedCellSize(30);
+		 prices.setFixedCellSize(30);
+		 sites.setFixedCellSize(30);
+		 
 		 Hyperlink hyper = new Hyperlink();
 		 String url = "http://www.amazon.com/Aldo-Womens-Brooklyn-Combat-Black/dp/B00KLMJ4HW/ref=sr_1_7_mc/188-2136881-9670640?s=shoes&ie=UTF8&qid=1429760710&sr=1-7&keywords=amazon+boots";
 		 hyper.setText("http://www.amazon.com/Aldo-Womens-Brooklyn-Combat-Black");
@@ -78,9 +85,49 @@ public class Controller {
 		
 	}
 	
+	@FXML
+	public void addItem(){
+		Hyperlink hyper = new Hyperlink();
+		String url = urlTextField.getText();
+		hyper = createHyperlink(url);
+		Parser parser = new Parser();
+		Item item = new Item(url);
+		
+		item = parser.parse(url);
+		String newProduct = item.title;
+		String newPrice = item.price;
+		
+		productList.add(newProduct);
+		priceList.add(newPrice);
+		siteList.add(hyper);
+		
+		
+	}
 	
-	
-	
+	private Hyperlink createHyperlink(String url){
+		Hyperlink hyper = new Hyperlink();
+		 hyper.setText(url);
+		 hyper.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+             public void handle(ActionEvent e) {
+            	 VBox vbox = new VBox();
+                 Scene scene = new Scene(vbox);
+                 Stage stage = new Stage();
+             
+                 final WebView browser = new WebView();
+        	     final WebEngine webEngine = browser.getEngine();
+                 webEngine.load(url);
+                 
+                 vbox.getChildren().add(browser);
+                 VBox.setVgrow(browser, Priority.ALWAYS);
+                 
+                 stage.setScene(scene);
+                 stage.show();
+                 System.out.println("Done!");
+             }
+         });
+		 return hyper;
+	}
 	
 	
 	

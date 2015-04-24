@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javafx.scene.control.Hyperlink;
+
 public class Parser {
 
     private String normalPriceText;
@@ -65,9 +67,10 @@ public class Parser {
         return iterateLine(s, startTitleChar);
     }
 
-    private boolean getShipping(String s) {
-        if (s.contains(freeShippingText)) {return true;}
-        return false;
+    private String getShipping(String s) {
+        System.out.println(s);
+        if (s.contains(freeShippingText)) {return "1";}
+        return "0";
     }
 
     private String iterateLine(String s, char startChar) {
