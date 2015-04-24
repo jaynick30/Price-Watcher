@@ -4,6 +4,9 @@ import java.io.File;
 
 import javax.swing.GroupLayout.Alignment;
 
+import java.sql.SQLException;
+
+import database.Manager;
 import model.Item;
 import URL.Parser;
 import URL.Website;
@@ -57,8 +60,14 @@ public class Controller {
 	public ObservableList<HBox> priceList = FXCollections.observableArrayList();
 	public ObservableList<Hyperlink> siteList = FXCollections.observableArrayList();
 	
+	private Manager itemBase;
+	
 	@FXML
 	private void initialize(){
+		try {itemBase = new Manager("Items");}
+		catch (ClassNotFoundException e) {e.printStackTrace();}
+		catch (SQLException e) {e.printStackTrace();}
+		
 		 products.setItems(productList);
 		 prices.setItems(priceList);
 		 sites.setItems(siteList);
@@ -94,6 +103,7 @@ public class Controller {
 		item = parser.parse(url);
 		String newProduct = item.title;
 		String newPrice = item.price;
+		itemBase.addItem(item);
 		
 		productList.add(newProduct);
 		addPrice(newPrice);
