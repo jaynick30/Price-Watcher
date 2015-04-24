@@ -1,5 +1,9 @@
-/GUI/
 /application/
+<<<<<<< HEAD
 /URL/
 /tests/
 /model/
+=======
+/database/
+/easysql/
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git

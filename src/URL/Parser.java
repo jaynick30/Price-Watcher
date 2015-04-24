@@ -22,12 +22,21 @@ public class Parser {
     private char endLineChar;
     private char startTitleChar;
 
+<<<<<<< HEAD
     public Parser() {
     	amazonStringParsing();
     }
+=======
+    public Parser() {}
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 
     public Item parse(String url) {
+<<<<<<< HEAD
         Item item = new Item();
+=======
+        setSite(Website.getSite(url));
+        Item item = new Item(url);
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
         try {
             URL site = new URL(url);
             HttpURLConnection httpCon = (HttpURLConnection) site.openConnection();
@@ -37,6 +46,7 @@ public class Parser {
             String line;
             while(true) {
                 line = in.readLine();
+                //System.out.println(line);
                 if (line == null) {break;}
                 if (line.contains(priceText)) {
                     item.price = getPriceFromLine(line);
@@ -45,6 +55,7 @@ public class Parser {
                     item.title = getTitleFromLine(line);
                 }
                 else if (line.contains(shippingText)) {
+                    for (int i=0; i<17; i++) {line = in.readLine();}
                     item.shipping = getShipping(line);
                 }
             }
@@ -68,7 +79,6 @@ public class Parser {
     }
 
     private boolean getShipping(String s) {
-        System.out.println(s);
         if (s.contains(freeShippingText)) {return true;}
         return false;
     }
@@ -83,8 +93,8 @@ public class Parser {
     }
 
     private String getEndOfString(String s, int i) {
+        if (s.charAt(i) != '$') {i++;}
         String newStr = "";
-        i++;
         char currentChar = s.charAt(i++);
         while (currentChar != endLineChar) {
             newStr += currentChar;
@@ -94,8 +104,19 @@ public class Parser {
     }
 
     private String manageString(String s) {
+<<<<<<< HEAD
         s.replace("&quot",""+'"');
         return s;
+=======
+        return s.replace("&quot;",""+'"');
+
+    }
+
+    private void setSite(Website site) {
+        if (site.equals(Website.AMAZON)) {
+            amazonStringParsing();
+        }
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
     }
 
     private void amazonStringParsing() {

@@ -10,4 +10,7 @@ public class Item {
     public Item() {
     	
     }
+
+    public boolean hasPrice() {return price!=null;}
+    public boolean hasTitle() {return title!=null;}
 }
