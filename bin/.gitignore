@@ -1,2 +1,12 @@
+<<<<<<< Updated upstream
+/URL/
+/application/
 /database/
+/easysql/
+/model/
 /tests/
+=======
+/model/
+/database/
+/application/
+>>>>>>> Stashed changes

@@ -52,7 +52,7 @@ public class Manager {
 	}
 	
 	public ResultSet getAllNamed(String name) {
-		String query = "SELECT * FROM " + table + "WHERE name = " + name + " ORDER BY timeStamp DESCENDING";
+		String query = "SELECT * FROM " + table + "WHERE name = " + name + " ORDER BY timeStamp ASCENDING";
 		try{return statement.executeQuery(query);}
 		catch (SQLException e) {errorMessage = "unable to find item";}
 		finally {System.out.println(errorMessage);}
@@ -60,7 +60,7 @@ public class Manager {
 	}
 	
 	public ResultSet getAllFromUrl(String url) {
-		String query = "SELECT * FROM " + table + "WHERE url = " + url + " ORDER BY timeStamp DESCENDING";
+		String query = "SELECT * FROM " + table + "WHERE url = " + url + " ORDER BY timeStamp ASCENDING";
 		try{return statement.executeQuery(query);}
 		catch (SQLException e) {errorMessage = "unable to find item";}
 		finally {System.out.println(errorMessage);}
@@ -68,7 +68,7 @@ public class Manager {
 	}
 	
 	public ResultSet getAllFromUrlNamed(String url, String name) {
-		String query = "SELECT * FROM " + table + "WHERE name = " + name + " AND url = " + url + " ORDER BY timeStamp DESCENDING";
+		String query = "SELECT * FROM " + table + "WHERE name = " + name + " AND url = " + url + " ORDER BY timeStamp ASCENDING";
 		try{return statement.executeQuery(query);}
 		catch (SQLException e) {errorMessage = "unable to find item";}
 		finally {System.out.println(errorMessage);}

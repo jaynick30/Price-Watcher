@@ -2,18 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5de8e0f8-7776-45db-b267-3a38f91784f3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/URL/URLConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/application/Controller$1.class" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/application/Controller$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/application/Controller.class" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/application/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/model/Item.class" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/model/Item.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/database/Manager.class" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/database/Manager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/URL/Parser.class" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/URL/Parser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/tests/ParserTests.class" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/tests/ParserTests.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GrayLine.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GreenArrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RedArrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/Point.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/PriceGraph.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/database/PriceGraphMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/application/Controller.class" afterPath="$PROJECT_DIR$/bin/application/Controller.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/URL/Parser.class" afterPath="$PROJECT_DIR$/bin/URL/Parser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/tests/ParserTests.class" afterPath="$PROJECT_DIR$/bin/tests/ParserTests.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/.gitignore" afterPath="$PROJECT_DIR$/bin/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/Controller.java" afterPath="$PROJECT_DIR$/src/application/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PriceWatcher/application/GUI.fxml" afterPath="$PROJECT_DIR$/out/production/PriceWatcher/application/GUI.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/URL/Parser.java" afterPath="$PROJECT_DIR$/src/URL/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tests/ParserTests.java" afterPath="$PROJECT_DIR$/src/tests/ParserTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/application/GUI.fxml" afterPath="$PROJECT_DIR$/bin/application/GUI.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/GUI.fxml" afterPath="$PROJECT_DIR$/src/application/GUI.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/Manager.java" afterPath="$PROJECT_DIR$/src/database/Manager.java" />
+      <change type="MOVED" beforePath="D:\workspace\PriceWatcher\bin\application\Controller$2.class" afterPath="$PROJECT_DIR$/bin/application/Controller$1.class" />
     </list>
     <ignored path="PriceWatcher.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,38 +41,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/URL/Parser.java">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/application/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63656145" vertical-offset="282" max-vertical-offset="2499">
-              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.42546245" vertical-offset="0" max-vertical-offset="2448">
+              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4296#4297#0" expanded="true" />
-                <element signature="e#4341#4342#0" expanded="true" />
+                <element signature="e#2689#3382#0" expanded="true" />
+                <element signature="e#3381#3382#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="URLConnector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/URL/URLConnector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
-              <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParserTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tests/ParserTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
-              <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,10 +69,10 @@
         <option value="$PROJECT_DIR$/src/model/Item.java" />
         <option value="$PROJECT_DIR$/src/URL/Website.java" />
         <option value="$PROJECT_DIR$/src/database/Manager.java" />
-        <option value="$PROJECT_DIR$/src/application/Controller.java" />
         <option value="$PROJECT_DIR$/src/URL/Parser.java" />
         <option value="$PROJECT_DIR$/src/URL/URLConnector.java" />
         <option value="$PROJECT_DIR$/src/tests/ParserTests.java" />
+        <option value="$PROJECT_DIR$/src/application/Controller.java" />
       </list>
     </option>
   </component>
@@ -124,6 +105,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -134,7 +116,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -202,10 +183,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -218,6 +195,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -508,12 +489,38 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/URL/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2499">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/URL/URLConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="680">
+          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/ParserTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="799">
+          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/URL/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1883" max-vertical-offset="2856">
           <caret line="122" column="14" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4296#4297#0" expanded="true" />
-            <element signature="e#4341#4342#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -532,8 +539,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4296#4297#0" expanded="true" />
-            <element signature="e#4341#4342#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -582,8 +587,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4296#4297#0" expanded="true" />
-            <element signature="e#4341#4342#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -610,8 +613,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4296#4297#0" expanded="true" />
-            <element signature="e#4341#4342#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,16 +656,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.538206" vertical-offset="1223" max-vertical-offset="2142">
-          <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/URL/URLConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
+        <state vertical-scroll-proportion="0.5734494" vertical-offset="0" max-vertical-offset="919">
           <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -674,7 +668,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/ParserTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+        <state vertical-scroll-proportion="0.28145695" vertical-offset="0" max-vertical-offset="906">
           <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
           <folding />
         </state>
@@ -686,8 +680,18 @@
           <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4296#4297#0" expanded="true" />
-            <element signature="e#4341#4342#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42546245" vertical-offset="0" max-vertical-offset="2448">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2689#3382#0" expanded="true" />
+            <element signature="e#3381#3382#0" expanded="true" />
           </folding>
         </state>
       </provider>
