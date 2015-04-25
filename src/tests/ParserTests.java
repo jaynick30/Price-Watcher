@@ -19,11 +19,7 @@ public class ParserTests {
     @Test
     public void testPrint() {
         item = parser.parse(testURL);
-        assertEquals(item.price, testPrice);
-        assertEquals(item.title, testTitle);
-        assertTrue(item.shipping == "1");
-        assertTrue(item.hasPrice());
-        assertTrue(item.hasTitle());
+        checkItem(testPrice, testTitle, "1");
     }
 
     @Test
@@ -43,5 +39,13 @@ public class ParserTests {
         System.out.println(item.price);
         System.out.println(item.title);
         System.out.println(item.shipping);
+    }
+
+    private void checkItem(String price, String title, String shipping) {
+        assertEquals(price, item.price);
+        assertEquals(title, item.title);
+        assertTrue(item.shipping == shipping);
+        assertTrue(item.hasPrice());
+        assertTrue(item.hasTitle());
     }
 }

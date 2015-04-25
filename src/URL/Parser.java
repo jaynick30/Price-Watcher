@@ -1,15 +1,16 @@
 package URL;
 
 import model.Item;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class Parser {
 
     private URLConnector connector = new URLConnector();
     private String normalPriceText;
-    private String otherPriceText;
+    private String altPriceText;
     private String blockPriceText;
     private String shippingText;
     private String freeShippingText;
@@ -26,42 +27,53 @@ public class Parser {
     public Parser() {}
 
     public Item parse(String url) {
+        String currentLine;
         setSite(Website.getSite(url));
         Item item = new Item(url);
-        try {
-            BufferedReader in = connectToSite(url);
-            String line;
-            while(true) {
-                line = in.readLine();
-                if (line == null) {break;}
-                else if (!item.hasPrice()) {
-                    if (hasPriceText(line)) {
-                        item.price = getPriceFromLine(line);
-                    }
-                }
-                else if (!item.hasTitle()) {
-                    System.out.println(line);
-                    if (hasNormalTitleText(line)) {
-                        System.out.println(line);
-                        System.out.println("1");
-                        item.title = getTitleFromLine(line);
-                    } else if (hasAltTitleText(line)) {
-                        System.out.println(line);
-                        System.out.println("2");
-                        item.title = getTitleFromAltLine(line);
-                    }
-                }
-                else if (line.contains(shippingText)) {
-                    for (int i=0; i<siteShippingSpacing; i++) {line = in.readLine();}
-                    item.shipping = getShipping(line);
-                }
-            }
-            in.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        Document doc = connector.connect2(url);
+        setPrice(item, doc);
+        setTitle(item, doc);
+        setShipping(item, doc);
         return item;
+    }
+
+    private void setPrice(Item item, Document doc) {
+        String currentLine;
+        if (getLine(doc, normalPriceText) != null) {
+            System.out.println("first");
+            currentLine = getLine(doc, normalPriceText);
+        }
+        else if (getLine(doc, blockPriceText) != null) {
+            System.out.println("second");
+            currentLine = getLine(doc, blockPriceText);
+        }
+        else if (getLine(doc, altPriceText) != null) {
+            System.out.println("third");
+            currentLine = getLine(doc, blockPriceText);
+        }
+        else {return;}
+        item.price = getPriceFromLine(currentLine);
+    }
+
+    private void setTitle(Item item, Document doc) {
+        String currentLine;
+        if (getLine(doc, normalTitleText) != null) {
+            System.out.println("first");
+            currentLine = getLine(doc, normalTitleText);
+        }
+        else if (getLine(doc, altTitleText) != null) {
+            System.out.println("second");
+            currentLine = getLine(doc, altTitleText);
+        }
+        else {return;}
+        item.title = getTitleFromLine(currentLine);
+    }
+
+    private void setShipping(Item item, Document doc) {
+        String currentLine = getLine(doc, shippingText);
+        if (currentLine != null) {
+            item.shipping = getShipping(currentLine);
+        }
     }
 
     private String getPriceFromLine(String s) {
@@ -75,7 +87,6 @@ public class Parser {
     private String getTitleFromAltLine(String s) { return iterateAltLine(s, altStartTitleStr);}
 
     private String getShipping(String s) {
-        System.out.println(s);
         if (s.contains(freeShippingText)) {return "1";}
         return "0";
     }
@@ -95,7 +106,7 @@ public class Parser {
     }
 
     private String getEndOfString(String s, int i, char endChar) {
-        if (s.charAt(i) != '$') {i++;}
+        if (s.charAt(i) != startPriceChar) {i++;}
         String newStr = "";
         char currentChar = s.charAt(i++);
         while (currentChar != endChar) {
@@ -117,20 +128,31 @@ public class Parser {
     }
 
     private void amazonStringParsing() {
-        normalPriceText = "span id=\"priceblock_ourprice";
-        otherPriceText = "class=\"priceLarge";
+        normalPriceText = "priceblock_ourprice";
+        altPriceText = "priceLarge";
         blockPriceText = "a-color-price offer-price";
+
+        normalTitleText = "productTitle";
+        altTitleText = "title:";
+
+        shippingText = "ourprice_shippingmessage";
+        freeShippingText = "FREE Shipping";
+
+        altStartTitleStr = "title: '";
+
         startPriceChar = '$';
         endPriceChar = '<';
         endTitleChar = '<';
         altEndTitleChar = '\'';
-        normalTitleText = "span id=\"productTitle";
-        altTitleText = "title:";
         startTitleChar = '>';
-        altStartTitleStr = "title: '";
-        shippingText = "id=\"ourprice_shippingmessage";
-        freeShippingText = "FREE Shipping";
+
         siteShippingSpacing = 17;
+    }
+
+    private String getLine(Document doc, String id) {
+        Element element = doc.getElementById(id);
+        if (element == null) {return null;}
+        return element.toString();
     }
 
     private BufferedReader connectToSite(String url) {
@@ -138,7 +160,7 @@ public class Parser {
     }
 
     private boolean hasPriceText(String line) {
-        return line.contains(normalPriceText) || line.contains(otherPriceText) || line.contains(blockPriceText);
+        return line.contains(normalPriceText) || line.contains(altPriceText) || line.contains(blockPriceText);
     }
     private boolean hasNormalTitleText(String line) {
         return line.contains(normalTitleText);

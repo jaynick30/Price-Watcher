@@ -1,5 +1,7 @@
 package URL;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class URLConnector {
-
     public URLConnector() {
 
     }
@@ -23,6 +24,16 @@ public class URLConnector {
             return new BufferedReader(reader);
         }
         catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Document connect2(String url) {
+        try {
+            Document doc = Jsoup.connect(url).get();
+            return doc;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
