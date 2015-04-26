@@ -51,7 +51,7 @@ public class ParserTests {
     private void checkItem(String title, String price, String shipping) {
         assertEquals(title, item.title);
         assertEquals(price, item.price);
-        assertTrue(item.shipping == shipping);
+        assertTrue(item.shipping.equals(shipping));
         assertTrue(item.hasPrice());
         assertTrue(item.hasTitle());
     }
