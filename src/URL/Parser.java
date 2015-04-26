@@ -3,19 +3,18 @@ package URL;
 import model.Item;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
-import java.io.BufferedReader;
+import org.jsoup.select.Elements;
 
 public class Parser {
 
     private URLConnector connector = new URLConnector();
-    private String normalPriceText;
-    private String altPriceText;
-    private String blockPriceText;
+    private String normalPriceId;
+    private String normalPriceClass;
+    private String altPriceClass;
     private String shippingText;
     private String freeShippingText;
-    private String normalTitleText;
-    private String altTitleText;
+    private String normalTitleId;
+    private String altTitleId;
     private String altStartTitleStr;
     private char startPriceChar;
     private char startTitleChar;
@@ -39,31 +38,37 @@ public class Parser {
 
     private void setPrice(Item item, Document doc) {
         String currentLine;
-        if (getLine(doc, normalPriceText) != null) {
+        if (getLine(doc, normalPriceId) != null) {
             System.out.println("first");
-            currentLine = getLine(doc, normalPriceText);
+            currentLine = getLine(doc, normalPriceId);
+            item.price = getPriceFromLine(currentLine);
         }
-        else if (getLine(doc, blockPriceText) != null) {
+        else if (getLine(doc, altPriceClass) != null) {
             System.out.println("second");
-            currentLine = getLine(doc, blockPriceText);
+            currentLine = getLine(doc, altPriceClass);
+            item.price = getPriceFromLine(currentLine);
         }
-        else if (getLine(doc, altPriceText) != null) {
+        else if (doc.select(normalPriceClass) != null) {
             System.out.println("third");
-            currentLine = getLine(doc, blockPriceText);
+            Elements elements = doc.select(normalPriceClass);
+            for (Element element : elements) {
+                if (item.price == null) {
+                    System.out.println(element.text());
+                    item.price = getPriceFromLine(element.text());
+                }
+            }
         }
-        else {return;}
-        item.price = getPriceFromLine(currentLine);
+
     }
 
     private void setTitle(Item item, Document doc) {
         String currentLine;
-        if (getLine(doc, normalTitleText) != null) {
-            System.out.println("first");
-            currentLine = getLine(doc, normalTitleText);
+        if (getLine(doc, normalTitleId) != null) {
+            currentLine = getLine(doc, normalTitleId);
         }
-        else if (getLine(doc, altTitleText) != null) {
-            System.out.println("second");
-            currentLine = getLine(doc, altTitleText);
+        else if (getLine(doc, altTitleId) != null) {
+            System.out.println("here");
+            currentLine = getLine(doc, altTitleId);
         }
         else {return;}
         item.title = getTitleFromLine(currentLine);
@@ -83,8 +88,6 @@ public class Parser {
     private String getTitleFromLine(String s) {
         return iterateLine(s, startTitleChar, endTitleChar);
     }
-
-    private String getTitleFromAltLine(String s) { return iterateAltLine(s, altStartTitleStr);}
 
     private String getShipping(String s) {
         if (s.contains(freeShippingText)) {return "1";}
@@ -108,10 +111,12 @@ public class Parser {
     private String getEndOfString(String s, int i, char endChar) {
         if (s.charAt(i) != startPriceChar) {i++;}
         String newStr = "";
-        char currentChar = s.charAt(i++);
+        char currentChar = s.charAt(i);
         while (currentChar != endChar) {
             newStr += currentChar;
-            currentChar = s.charAt(i++);
+            i++;
+            if (i >= s.length()) {break;}
+            currentChar = s.charAt(i);
         }
         return manageString(newStr);
     }
@@ -128,12 +133,12 @@ public class Parser {
     }
 
     private void amazonStringParsing() {
-        normalPriceText = "priceblock_ourprice";
-        altPriceText = "priceLarge";
-        blockPriceText = "a-color-price offer-price";
+        normalPriceId = "priceblock_ourprice";
+        normalPriceClass = ".a-color-price";
+        altPriceClass = ".priceLarge";
 
-        normalTitleText = "productTitle";
-        altTitleText = "title:";
+        normalTitleId = "productTitle";
+        altTitleId = "btAsinTitle";
 
         shippingText = "ourprice_shippingmessage";
         freeShippingText = "FREE Shipping";
@@ -153,19 +158,5 @@ public class Parser {
         Element element = doc.getElementById(id);
         if (element == null) {return null;}
         return element.toString();
-    }
-
-    private BufferedReader connectToSite(String url) {
-        return connector.connect(url);
-    }
-
-    private boolean hasPriceText(String line) {
-        return line.contains(normalPriceText) || line.contains(altPriceText) || line.contains(blockPriceText);
-    }
-    private boolean hasNormalTitleText(String line) {
-        return line.contains(normalTitleText);
-    }
-    private boolean hasAltTitleText(String line) {
-        return line.contains(altTitleText);
     }
 }
