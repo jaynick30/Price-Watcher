@@ -22,7 +22,7 @@ public class Parser {
     public Item parse(String url) {
         setSite(Website.getSite(url));
         Item item = new Item(url);
-        Document doc = connector.connect2(url);
+        Document doc = connector.connect(url);
         setPrice(item, doc);
         setTitle(item, doc);
         setShipping(item, doc);
