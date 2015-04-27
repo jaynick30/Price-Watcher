@@ -1,0 +1,18 @@
+added a backpack and it gave the wrong prices
+also, just gives errors whenever I enter an invalid link
+Parser should be a global instantiation
+Why did you make a class point instead of just importing it?
+If you add something and it can't find the product name, it puts null but then adds an additional null. The additional null is overwritten by the next product with a product name
+	-One way to fix this might be to make the name be the keywords that were searched
+	-Everything we did from Fine Art had this problem
+Also what is with the bars next to the prices?
+If it's a Sale item, some times it doesn't give you a price. Ex: Vera Bradley large duffle bag
+Adding categories doesn't work and neither does the menu bar
+If the item has a range of prices, it shows the whole range. When you select a specific item to narrow down the price, it doesn't update it
+Also, shipping should always be shown
+
+To Do:
+-Fine art/backpacks
+-Items on sale
+-get URL from browser
+-fix when invalid link is given
