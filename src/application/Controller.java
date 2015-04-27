@@ -71,7 +71,7 @@ public class Controller {
 		
 	}
 	
-	private void addPrice(String newPrice){
+	private void addPrice(String newPrice, Item item){
 		HBox hbox = new HBox();
 		hbox.setAlignment(Pos.CENTER);
 		Text text = new Text();
@@ -83,6 +83,10 @@ public class Controller {
 		arrow.setFitWidth(15);
 		hbox.getChildren().addAll(text, arrow);
 		priceList.add(hbox);
+		if(item.shipping.equals("1")){
+			Text shipping = new Text(" + free shipping!");
+			hbox.getChildren().add(shipping);
+		}
 	}		
 	
 	@FXML
@@ -99,7 +103,7 @@ public class Controller {
 		itemBase.addItem(item);
 		
 		productList.add(newProduct);
-		addPrice(newPrice);
+		addPrice(newPrice, item);
 		siteList.add(hyper);
 		urlTextField.clear();
 	}
