@@ -40,13 +40,13 @@ public class ParserTests {
         backpack.shipping = "1";
 
         art = new Item("http://www.amazon.com/The-Artist-and-His-Wife/dp/B00E9EC28G/ref=sr_1_1?ie=UTF8&qid=1430271197&sr=8-1&keywords=fine+art");
-        art.price = "285,000.00";
-        art.title = "The Artist and His Wife, 1971";
+        art.price = "$285,000.00";
+        art.title = "The Artist and His Wife";
         art.shipping = "1";
     }
 
 
-    @Test
+    /*@Test
     public void testPrint() {
         item = parser.parse(test.url);
         checkItem(test);
@@ -68,12 +68,12 @@ public class ParserTests {
     public void testBackpackURL() {
         item = parser.parse(backpack.url);
         printItemValues(item);
-    }
+    }*/
 
     @Test
     public void testArtURL() {
         item = parser.parse(art.url);
-        printItemValues(item);
+        checkItem(art);
     }
 
 

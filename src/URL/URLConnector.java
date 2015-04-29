@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 public class URLConnector {
     public URLConnector() {
@@ -22,7 +23,16 @@ public class URLConnector {
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
-        } catch (IOException e) {
+        }
+        catch (SocketTimeoutException e) {
+            try {
+                Thread.sleep(1000);
+                return connect(url);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         return null;

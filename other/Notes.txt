@@ -12,7 +12,6 @@ If the item has a range of prices, it shows the whole range. When you select a s
 Also, shipping should always be shown
 
 To Do:
--Fine art/backpacks
 -Items on sale
 -get URL from browser
 -fix when invalid link is given

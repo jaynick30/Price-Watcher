@@ -53,7 +53,9 @@ public class Parser {
         }
         else if (getLine(doc, artTitleId) != null) {
             currentLine = getLine(doc, artTitleId);
-            //currentLine = "\"" + currentLine + "\"" + getLine(doc, artistTitleId);
+            currentLine = iterator.getTitleFromLine(currentLine);
+            item.title = currentLine.substring(0,currentLine.length()-1);
+            return;
         }
         else {return;}
         item.title = iterator.getTitleFromLine(currentLine);
