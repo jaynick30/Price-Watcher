@@ -15,6 +15,7 @@ public class ParserTests {
     private Item book;
     private Item game;
     private Item backpack;
+    private Item art;
 
     @Before
     public void initialize() {
@@ -29,7 +30,7 @@ public class ParserTests {
         book.shipping = "0";
 
         game = new Item("http://www.amazon.com/Bloodborne-PlayStation-4/dp/B00KVR4HEC/ref=sr_1_1?ie=UTF8&qid=1429839651&sr=8-1&keywords=bloodborne");
-        game.price = "$59.02";
+        game.price = "$56.99";
         game.title = "Bloodborne";
         game.shipping = "1";
 
@@ -37,6 +38,11 @@ public class ParserTests {
         backpack.price = "$26.88";
         backpack.title = "Classic SuperBreak Backpack";
         backpack.shipping = "1";
+
+        art = new Item("http://www.amazon.com/The-Artist-and-His-Wife/dp/B00E9EC28G/ref=sr_1_1?ie=UTF8&qid=1430271197&sr=8-1&keywords=fine+art");
+        art.price = "285,000.00";
+        art.title = "The Artist and His Wife, 1971";
+        art.shipping = "1";
     }
 
 
@@ -61,6 +67,12 @@ public class ParserTests {
     @Test
     public void testBackpackURL() {
         item = parser.parse(backpack.url);
+        printItemValues(item);
+    }
+
+    @Test
+    public void testArtURL() {
+        item = parser.parse(art.url);
         printItemValues(item);
     }
 

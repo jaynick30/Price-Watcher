@@ -16,6 +16,8 @@ public class Parser {
     private String altShippingId;
     private String normalTitleId;
     private String altTitleId;
+    private String artTitleId;
+    private String artistTitleId;
 
     public Parser() {}
 
@@ -48,6 +50,10 @@ public class Parser {
         }
         else if (getLine(doc, altTitleId) != null) {
             currentLine = getLine(doc, altTitleId);
+        }
+        else if (getLine(doc, artTitleId) != null) {
+            currentLine = getLine(doc, artTitleId);
+            //currentLine = "\"" + currentLine + "\"" + getLine(doc, artistTitleId);
         }
         else {return;}
         item.title = iterator.getTitleFromLine(currentLine);
@@ -106,6 +112,8 @@ public class Parser {
 
         normalTitleId = "productTitle";
         altTitleId = "btAsinTitle";
+        artTitleId = "fineArtTitle";
+        artistTitleId = "fine-ART-ProductLabelArtistNameLink";
 
         shippingId = "ourprice_shippingmessage";
         altShippingId = "actualPriceExtraMessaging";
