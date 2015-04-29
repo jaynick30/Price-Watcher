@@ -52,23 +52,29 @@ public class Controller {
 	public ObservableList<String> productList = FXCollections.observableArrayList();
 	public ObservableList<HBox> priceList = FXCollections.observableArrayList();
 	public ObservableList<Hyperlink> siteList = FXCollections.observableArrayList();
-	
+
+    private Parser parser;
 	private Manager itemBase;
+    private String currentURL;
+    private final WebView browser = new WebView();
+    private final WebEngine webEngine = browser.getEngine();
 	
 	@FXML
 	private void initialize(){
+        parser = new Parser();
 		try {itemBase = new Manager("Items");}
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		catch (SQLException e) {e.printStackTrace();}
+
+        hideBrowser();
 		
-		 products.setItems(productList);
-		 prices.setItems(priceList);
-		 sites.setItems(siteList);
+		products.setItems(productList);
+		prices.setItems(priceList);
+        sites.setItems(siteList);
 		 
-		 products.setFixedCellSize(30);
-		 prices.setFixedCellSize(30);
-		 sites.setFixedCellSize(30);
-		
+		products.setFixedCellSize(30);
+		prices.setFixedCellSize(30);
+		sites.setFixedCellSize(30);
 	}
 	
 	private void addPrice(String newPrice, Item item){
@@ -94,10 +100,7 @@ public class Controller {
 		Hyperlink hyper = new Hyperlink();
 		String url = urlTextField.getText();
 		hyper = createHyperlink(url);
-		Parser parser = new Parser();
-		Item item = new Item(url);
-		
-		item = parser.parse(url);
+		Item item = parser.parse(url);
 		String newProduct = item.title;
 		String newPrice = item.price;
 		itemBase.addItem(item);
@@ -117,9 +120,7 @@ public class Controller {
             	 VBox vbox = new VBox();
                  Scene scene = new Scene(vbox);
                  Stage stage = new Stage();
-             
-                 final WebView browser = new WebView();
-        	     final WebEngine webEngine = browser.getEngine();
+                 showBrowser();
                  webEngine.load(url);
                  
                  vbox.getChildren().add(browser);
@@ -127,16 +128,21 @@ public class Controller {
                  
                  stage.setScene(scene);
                  stage.show();
-                 System.out.println("Done!");
              }
          });
 		 return hyper;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+    private String requestURL() {
+        currentURL = webEngine.locationProperty().get();
+        return currentURL;
+    }
+
+    private void showBrowser() {
+        browser.setVisible(true);
+    }
+
+    private void hideBrowser() {
+        browser.setVisible(false);
+    }
 }
