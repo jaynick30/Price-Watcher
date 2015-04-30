@@ -111,7 +111,7 @@ public class Controller {
 		urlTextField.clear();
 	}
 	
-	private Hyperlink createHyperlink(final String url){
+	private Hyperlink createHyperlink(final String url) {
 		Hyperlink hyper = new Hyperlink();
 		 hyper.setText(url);
 		 hyper.setOnAction(new EventHandler<ActionEvent>() {

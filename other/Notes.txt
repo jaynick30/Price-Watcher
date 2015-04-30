@@ -15,3 +15,5 @@ To Do:
 -Items on sale
 -get URL from browser
 -fix when invalid link is given
+-change data type of shipping
+-instead of always downloading html from server, download html to files
