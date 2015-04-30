@@ -1,6 +1,8 @@
 package URL;
 
 import model.Item;
+import model.Shipping;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -63,14 +65,14 @@ public class Parser {
 
     private void setShipping(Item item, Document doc) {
         if (getLine(doc, shippingId) != null) {
-            item.shipping = getShippingFromId(doc, shippingId);
+            item.setShipping(getShippingFromId(doc, shippingId));
         }
         else if (getLine(doc, altShippingId) != null) {
-            item.shipping = getShippingFromId(doc, altShippingId);
+            item.setShipping(getShippingFromId(doc, altShippingId));
         }
     }
 
-    private String getShippingFromId(Document doc, String id) {
+    private boolean getShippingFromId(Document doc, String id) {
         String currentLine = getLine(doc, id);
         return iterator.getShipping(currentLine);
     }

@@ -10,8 +10,8 @@ public class PriceGraph {
 		itemName = name;
 	}
 	
-	public void addPoint(float time, float price) {
-		Point p = new Point(time, price);
+	public void addPoint(int index, float price) {
+		Point p = new Point(index, price);
 		points.add(p);
 	}
 	

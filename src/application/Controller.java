@@ -2,6 +2,7 @@ package application;
 
 import URL.Parser;
 import database.Manager;
+import database.PriceGraphMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +21,12 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Item;
+import model.Point;
+import model.PriceGraph;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Controller {
 	@FXML
@@ -59,10 +64,14 @@ public class Controller {
     private final WebView browser = new WebView();
     private final WebEngine webEngine = browser.getEngine();
 	
+
+	
 	@FXML
 	private void initialize(){
-        parser = new Parser();
-		try {itemBase = new Manager("Items");}
+		try {
+			itemBase = new Manager("Items");
+			itemBase.createTable();
+		}
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		catch (SQLException e) {e.printStackTrace();}
 
@@ -77,11 +86,11 @@ public class Controller {
 		sites.setFixedCellSize(30);
 	}
 	
-	private void addPrice(String newPrice, Item item){
+	private void addPrice(Item item){
 		HBox hbox = new HBox();
 		hbox.setAlignment(Pos.CENTER);
 		Text text = new Text();
-		text.setText(newPrice);
+		text.setText(item.price);
 		ImageView arrow = new ImageView();
 		Image image = new Image("file:GrayLine.png");
 		arrow.setImage(image);
@@ -93,7 +102,7 @@ public class Controller {
 			Text shipping = new Text(" + free shipping!");
 			hbox.getChildren().add(shipping);
 		}
-	}		
+	}
 	
 	@FXML
 	public void addItem(){
@@ -104,11 +113,31 @@ public class Controller {
 		String newProduct = item.title;
 		String newPrice = item.price;
 		itemBase.addItem(item);
+		items.add(item);
 		
 		productList.add(newProduct);
-		addPrice(newPrice, item);
+		addPrice(item);
 		siteList.add(hyper);
 		urlTextField.clear();
+	}
+	
+	public void update() throws SQLException {
+		for (int i = 0; i < items.size(); i++) {
+			Item update = itemBase.getMostRecent(items.get(i));
+			items.set(i, update);
+		}
+	}
+	
+	public void drawPriceGraph(Item item) {
+		PriceGraphMaker maker = new PriceGraphMaker();
+		try{
+			PriceGraph graph = maker.makePriceGraph(item);
+			ArrayList<Point> recentPoints = graph.getLastOneHundredPoints();
+			//TODO: draw recentPoints on a pane
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		
+		
 	}
 	
 	private Hyperlink createHyperlink(final String url){

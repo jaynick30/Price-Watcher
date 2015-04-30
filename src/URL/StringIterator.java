@@ -17,9 +17,9 @@ public class StringIterator {
         return iterateLine(s, startTitleChar, endTitleChar);
     }
 
-    public String getShipping(String s) {
-        if (s.contains(freeShippingText)) {return "1";}
-        return "0";
+    public boolean getShipping(String s) {
+        if (s.contains(freeShippingText)) {return true;}
+        return false;
     }
 
     public void amazonStringParsing() {
