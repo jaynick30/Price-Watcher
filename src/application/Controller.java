@@ -24,6 +24,7 @@ import model.Item;
 import model.Point;
 import model.PriceGraph;
 
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class Controller {
 	public ObservableList<HBox> priceList = FXCollections.observableArrayList();
 	public ObservableList<Hyperlink> siteList = FXCollections.observableArrayList();
 
-    private Parser parser;
+    private Parser parser = new Parser();
 	private Manager itemBase;
 	private ArrayList<Item> items;
     private String currentURL;
@@ -86,14 +87,19 @@ public class Controller {
 	public void addItem(){
 		String url = urlTextField.getText();
 		Hyperlink hyper = createHyperlink(url);
-		Item item = parser.parse(url);
-		itemBase.addItem(item);
-		items.add(item);
-		
-		productList.add(item.title);
-		addPrice(item);
-		siteList.add(hyper);
-		urlTextField.clear();
+        try {
+            Item item = parser.parse(url);
+            itemBase.addItem(item);
+            items.add(item);
+
+            productList.add(item.title);
+            addPrice(item);
+            siteList.add(hyper);
+            urlTextField.clear();
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public void update() throws SQLException {
@@ -112,6 +118,10 @@ public class Controller {
 		}
 		catch (SQLException e) {e.printStackTrace();}
 	}
+
+    public void updatePrice() {
+
+    }
 
     private void addPrice(Item item){
         HBox hbox = new HBox();
