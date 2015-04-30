@@ -76,8 +76,7 @@ public class ParserTests {
         item = parser.parse(kindle.url);
         checkItem(kindle);
         manager.addItem(item);
-        System.out.println("item");
-        assertEquals(manager.getMostRecent(item), item);
+        checkItem(manager.getMostRecent(item));
     }
 
     @Test

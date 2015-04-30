@@ -34,8 +34,8 @@ public class Manager {
 	}
 	
 	public void createTable() {
-		String create = "CREATE TABLE " + table + " ('name' STRING, 'price' STRING, 'shipping' STRING, 'url' STRING, 'index' REAL)";
-		try{statement.executeQuery(create);}
+		String create = "CREATE TABLE " + table + " (name STRING, price STRING, shipping STRING, url STRING, idx REAL)";
+		try{statement.execute(create);}
 		catch (SQLException e) {
 			errorMessage = "unable to create table";
 			System.out.println(errorMessage);
@@ -43,8 +43,8 @@ public class Manager {
 	}
 	
 	public void updateTable(Item item) {
-		String update = "UPDATE " + table + " SET index = index + 1 WHERE name = " + item.title + " AND url = " + item.url;
-		try{statement.executeQuery(update);}
+		String update = "UPDATE " + table + " SET idx = idx + 1 WHERE name = '" + item.title + "' AND url = '" + item.url + "'";
+		try{statement.execute(update);}
 		catch (SQLException e) {
 			errorMessage = "unable to update table";
 		}
@@ -52,8 +52,8 @@ public class Manager {
 	
 	public void addItem(Item item) {
 		updateTable(item);
-		String insert = "INSERT INTO " + table + " VALUES (" + item.title + ", "  + item.price + ", " + item.shipping.isFree() + ", " + item.url + ", 0";
-		try{statement.executeQuery(insert);}
+		String insert = "INSERT INTO " + table + " VALUES ('" + item.title + "', '"  + item.price + "', '" + item.shipping.isFree() + "', '" + item.url + "', 0)";
+		try{statement.execute(insert);}
 		catch (SQLException e) {
 			errorMessage = "unable to add this item";
 			System.out.println(errorMessage);
@@ -62,8 +62,8 @@ public class Manager {
 	}
 	
 	public void deleteItem(Item item) {
-		String delete = "DELETE FROM " + table + " WHERE name = " + item.title + " AND url = " + item.url;
-		try{statement.executeQuery(delete);}
+		String delete = "DELETE FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "'";
+		try{statement.execute(delete);}
 		catch (SQLException e) {
 			errorMessage = "unable to delete item";
 			e.printStackTrace();
@@ -71,16 +71,17 @@ public class Manager {
 	}
 	
 	public ResultSet getItem(Item item) {
-		String query = "SELECT * FROM " + table + " WHERE name = " + item.title + " AND url = " + item.url + " ORDER BY index DESCENDING";
+		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' ORDER BY idx DESCENDING";
 		try{return statement.executeQuery(query);}
 		catch (SQLException e) {errorMessage = "unable to find items";}
 		return null;
 	}
 	
 	public Item getMostRecent(Item item) {
-		String query = "SELECT * FROM " + table + " WHERE name = " + item.title + " AND url = " + item.url + " AND index = 0";
+		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' AND idx = 0";
 		try{
 			ResultSet result = statement.executeQuery(query);
+			result.next();
 			Item resultItem = new Item(result.getString("url"));
 			resultItem.title = result.getString("name");
 			resultItem.price = result.getString("price");
