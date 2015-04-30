@@ -3,15 +3,22 @@ package tests;
 import URL.Parser;
 import model.Item;
 
+import database.Manager;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 
-import database.Manager;
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ParserTests {
     private Parser parser = new Parser();
+
+    private Document doc;
     private Item item;
     private Item test;
     private Item book;
@@ -19,8 +26,9 @@ public class ParserTests {
     private Item backpack;
     private Item art;
     private Manager manager = new Manager("Test");
-
     
+    private String testFileName, bookFileName, gameFileName, backpackFileName, artFileName;
+
     @Before
     public void initialize() {
     	manager.createTable();
@@ -36,12 +44,12 @@ public class ParserTests {
         book.setShipping(false);
 
         game = new Item("http://www.amazon.com/Bloodborne-PlayStation-4/dp/B00KVR4HEC/ref=sr_1_1?ie=UTF8&qid=1429839651&sr=8-1&keywords=bloodborne");
-        game.price = "$56.99";
+        game.price = "$59.02";
         game.title = "Bloodborne";
         game.setShipping(true);
 
         backpack = new Item("http://www.amazon.com/JanSport-Superbreak-Classic-Backpack-Black/dp/B0007QCQGI/ref=sr_1_1?ie=UTF8&qid=1430147820&sr=8-1&keywords=backpack");
-        backpack.price = "$26.88";
+        backpack.price = "$30.50";
         backpack.title = "Classic SuperBreak Backpack";
         backpack.setShipping(true);
 
@@ -49,41 +57,53 @@ public class ParserTests {
         art.price = "$285,000.00";
         art.title = "The Artist and His Wife";
         art.setShipping(true);
+
+        testFileName = "Kindle Voyage";
+        bookFileName = "Memory Man";
+        gameFileName = "Bloodborne";
+        backpackFileName = "Classic SuperBreak Backpack";
+        artFileName = "The Artist and His Wife";
     }
-    
 
     @Test
     public void testPrint() {
-        item = parser.parse(test.url);
-        checkItem(test);
-        manager.addItem(item);
-        assertEquals(manager.getMostRecent(item), item);
+        testItem(test, testFileName);
     }
 
     @Test
     public void testBookURL() {
-        item = parser.parse(book.url);
-        checkItem(book);
+        testItem(book, bookFileName);
     }
 
     @Test
     public void testGameURL() {
-        item = parser.parse(game.url);
-        checkItem(game);
+        testItem(game, gameFileName);
     }
 
     @Test
-    public void testBackpackURL() {
-        item = parser.parse(backpack.url);
-        printItemValues(item);
-    }
+    public void testBackpackURL() { testItem(backpack, backpackFileName);}
 
     @Test
     public void testArtURL() {
-        item = parser.parse(art.url);
-        checkItem(art);
+        testItem(art, artFileName);
     }
 
+    private void testItem(Item testItem, String fileName) {
+        doc = getDocument(testItem, fileName);
+        item = parser.setValues(doc, testItem.url);
+        checkItem(testItem);
+    }
+
+    private Document getDocument(Item item, String fileName) {
+        File input = new File("other/files/" + fileName+".txt");
+        try {
+            return Jsoup.parse(input, "UTF-8", item.url);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     private void printItemValues(Item item) {
         System.out.println(item.title);

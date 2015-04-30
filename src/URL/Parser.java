@@ -8,10 +8,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Parser {
-
     private StringIterator iterator = new StringIterator();
     private URLConnector connector = new URLConnector();
     private String normalPriceId;
+    private String altPriceId;
     private String normalPriceClass;
     private String altPriceClass;
     private String shippingId;
@@ -19,14 +19,18 @@ public class Parser {
     private String normalTitleId;
     private String altTitleId;
     private String artTitleId;
-    private String artistTitleId;
 
     public Parser() {}
 
     public Item parse(String url) {
+        Document doc = connector.connect(url);
+        System.out.println(doc.toString());
+        return setValues(doc, url);
+    }
+
+    public Item setValues(Document doc, String url) {
         setSite(Website.getSite(url));
         Item item = new Item(url);
-        Document doc = connector.connect(url);
         setPrice(item, doc);
         setTitle(item, doc);
         setShipping(item, doc);
@@ -37,7 +41,9 @@ public class Parser {
         if (getLine(doc, normalPriceId) != null) {
             item.price = getPriceFromId(doc, normalPriceId);
         }
-        else if (doc.select(normalPriceClass).size() != 0) {
+        else if (getLine(doc, altPriceId) != null) {
+            item.price = getPriceFromId(doc, altPriceId);
+        } else if (doc.select(normalPriceClass).size() != 0) {
             item.price = getPriceFromClass(doc, normalPriceClass);
         }
         else if (doc.select(altPriceClass).size() != 0) {
@@ -72,9 +78,9 @@ public class Parser {
         }
     }
 
-    private boolean getShippingFromId(Document doc, String id) {
+    private String getPriceFromId(Document doc, String id) {
         String currentLine = getLine(doc, id);
-        return iterator.getShipping(currentLine);
+        return iterator.getPriceFromLine(currentLine);
     }
 
     private String getPriceFromClass(Document doc, String className) {
@@ -85,22 +91,22 @@ public class Parser {
         return null;
     }
 
+    private boolean getShippingFromId(Document doc, String id) {
+        String currentLine = getLine(doc, id);
+        return iterator.getShipping(currentLine);
+    }
+
+    private String getLine(Document doc, String id) {
+        if (doc.getElementById(id) == null) {return null;}
+        Element element = doc.getElementById(id);
+        return element.toString();
+    }
+
     private boolean correctPrice(String price) {
         if (price != null) {
             if (!price.contains("style")) {return true;}
         }
         return false;
-    }
-
-    private String getPriceFromId(Document doc, String id) {
-        String currentLine = getLine(doc, id);
-        return iterator.getPriceFromLine(currentLine);
-    }
-
-    private String getLine(Document doc, String id) {
-        Element element = doc.getElementById(id);
-        if (element == null) {return null;}
-        return element.toString();
     }
 
     private void setSite(Website site) {
@@ -111,13 +117,13 @@ public class Parser {
 
     private void amazonStringParsing() {
         normalPriceId = "priceblock_ourprice";
+        altPriceId = "buyingPriceContent";
         normalPriceClass = ".a-color-price";
         altPriceClass = ".priceLarge";
 
         normalTitleId = "productTitle";
         altTitleId = "btAsinTitle";
         artTitleId = "fineArtTitle";
-        artistTitleId = "fine-ART-ProductLabelArtistNameLink";
 
         shippingId = "ourprice_shippingmessage";
         altShippingId = "actualPriceExtraMessaging";
