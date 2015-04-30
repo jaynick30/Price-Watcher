@@ -57,7 +57,6 @@ public class ParserTests {
         item = parser.parse(test.url);
         checkItem(test);
         manager.addItem(item);
-        System.out.println("item");
         assertEquals(manager.getMostRecent(item), item);
     }
 
