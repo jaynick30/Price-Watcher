@@ -20,23 +20,23 @@ public class ParserTests {
 
     private Document doc;
     private Item item;
-    private Item test;
+    private Item kindle;
     private Item book;
     private Item game;
     private Item backpack;
     private Item art;
     private Manager manager = new Manager("Test");
 
-    private String testFileName, bookFileName, gameFileName, backpackFileName, artFileName;
+    private String kindleFileName, bookFileName, gameFileName, backpackFileName, artFileName;
 
     @Before
     public void initialize() {
     	manager.createTable();
     	
-        test = new Item("http://www.amazon.com/gp/product/B00IOY8XWQ/ref=s9_psimh_gw_p349_d0_i2?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=desktop-1&pf_rd_r=1GFJPB3F15ZGZ6GGH4AV&pf_rd_t=36701&pf_rd_p=2079475182&pf_rd_i=desktop");
-        test.price = "$199.00";
-        test.title = "Kindle Voyage";
-        test.setShipping(Shipping.FREE);
+        kindle = new Item("http://www.amazon.com/gp/product/B00IOY8XWQ/ref=s9_psimh_gw_p349_d0_i2?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=desktop-1&pf_rd_r=1GFJPB3F15ZGZ6GGH4AV&pf_rd_t=36701&pf_rd_p=2079475182&pf_rd_i=desktop");
+        kindle.price = "$199.00";
+        kindle.title = "Kindle Voyage";
+        kindle.setShipping(Shipping.PAID);
 
         book = new Item("http://www.amazon.com/Memory-Amos-Decker-David-Baldacci/dp/1455559822/ref=sr_1_1?s=books&ie=UTF8&qid=1429838562&sr=1-1&keywords=book");
         book.price = "$14.67";
@@ -51,14 +51,14 @@ public class ParserTests {
         backpack = new Item("http://www.amazon.com/JanSport-Superbreak-Classic-Backpack-Black/dp/B0007QCQGI/ref=sr_1_1?ie=UTF8&qid=1430147820&sr=8-1&keywords=backpack");
         backpack.price = "$30.50";
         backpack.title = "Classic SuperBreak Backpack";
-        backpack.setShipping(Shipping.FREE);
+        backpack.setShipping(Shipping.PAID);
 
         art = new Item("http://www.amazon.com/The-Artist-and-His-Wife/dp/B00E9EC28G/ref=sr_1_1?ie=UTF8&qid=1430271197&sr=8-1&keywords=fine+art");
         art.price = "$285,000.00";
         art.title = "The Artist and His Wife";
         art.setShipping(Shipping.FREE);
 
-        testFileName = "Kindle Voyage";
+        kindleFileName = "Kindle Voyage";
         bookFileName = "Memory Man";
         gameFileName = "Bloodborne";
         backpackFileName = "Classic SuperBreak Backpack";
@@ -67,16 +67,22 @@ public class ParserTests {
     }
 
     @Test
-    public void testPrint() {
-        testItem(test, testFileName);
+    public void testConnect() {
+        item = parser.parse(kindle.url);
     }
+
     @Test
-    public void testPrint2() {
-        item = parser.parse(test.url);
-        checkItem(test);
+    public void testDatabaseConnect() {
+        item = parser.parse(kindle.url);
+        checkItem(kindle);
         manager.addItem(item);
         System.out.println("item");
         assertEquals(manager.getMostRecent(item), item);
+    }
+
+    @Test
+    public void testPrint() {
+        testItem(kindle, kindleFileName);
     }
 
     @Test

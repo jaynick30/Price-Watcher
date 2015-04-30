@@ -70,6 +70,7 @@ public class Parser {
 
     private void setShipping(Item item, Document doc) {
         if (getLine(doc, shippingId) != null) {
+            System.out.println("normal");
             item.setShipping(getShippingFromId(doc, shippingId));
         }
         else if (getLine(doc, altShippingId) != null) {

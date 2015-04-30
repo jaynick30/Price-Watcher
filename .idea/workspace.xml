@@ -2,81 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5de8e0f8-7776-45db-b267-3a38f91784f3" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.classpath" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\copyright\profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\libraries\jsoup_1_8_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\libraries\sqlite_jdbc_3_8_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\scopes\scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.project" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\.settings\org.eclipse.jdt.core.prefs" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\GrayLine.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\GreenArrow.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\InsertQuery" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\ItemDB" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\PriceWatcher.iml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\RedArrow.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\URL\Parser.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\URL\Website.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\application\Controller$1.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\application\Controller.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\application\GUI.fxml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\application\Main.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\application\application.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\easysql\Build.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\easysql\Reader.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\model\Item.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\bin\tests\ParserTests.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\build.fxbuild" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\jsoup-1.8.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\other\Notes.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\other\files\Bloodborne.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\other\files\Classic SuperBreak Backpack.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\other\files\Kindle Voyage.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\other\files\Memory Man.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\other\files\The Artist and His Wife.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\URL\Parser.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\URL\StringIterator.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\URL\URLConnector.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\URL\Website.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\application\Controller$1.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\application\Controller.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\application\GUI.fxml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\application\Main.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\application\application.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\database\Manager.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\database\PriceGraphMaker.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\easysql\Build.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\easysql\Reader.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\model\Item.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\model\Point.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\model\PriceGraph.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\out\production\PriceWatcher\tests\ParserTests.class" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\sqlite-jdbc-3.8.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\URL\Parser.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\URL\StringIterator.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\URL\URLConnector.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\URL\Website.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\application\GUI.fxml" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\application\Main.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\application\application.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\database\Manager.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\database\PriceGraphMaker.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\easysql\Build.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\easysql\Reader.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\model\Item.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\model\Point.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\model\PriceGraph.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\workspace\PriceWatcher\src\tests\ParserTests.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/Controller.java" afterPath="$PROJECT_DIR$/src/application/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Item.java" afterPath="$PROJECT_DIR$/src/model/Item.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/URL/Parser.java" afterPath="$PROJECT_DIR$/src/URL/Parser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tests/ParserTests.java" afterPath="$PROJECT_DIR$/src/tests/ParserTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PriceWatcher.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,23 +30,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ParserTests.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/URL/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="2278">
+              <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParserTests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tests/ParserTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="582" max-vertical-offset="2159">
-              <caret line="60" column="39" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.3058637" vertical-offset="810" max-vertical-offset="2261">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2542#2543#0" expanded="true" />
+                <element signature="e#2589#2590#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.fxbuild" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.fxbuild">
+      <file leaf-file-name="Classic SuperBreak Backpack.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/other/files/Classic SuperBreak Backpack.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="23490" max-vertical-offset="57596">
+              <caret line="1395" column="88" selection-start-line="1395" selection-start-column="75" selection-end-line="1395" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -126,41 +67,8 @@
       <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Item.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="391">
-              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-              <folding>
-                <element signature="e#343#344#0" expanded="true" />
-                <element signature="e#368#369#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/URL/Parser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21980414" vertical-offset="954" max-vertical-offset="2261">
-              <caret line="72" column="57" selection-start-line="72" selection-start-column="57" selection-end-line="72" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Shipping.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Shipping.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="272">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StringIterator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/URL/StringIterator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="118" max-vertical-offset="1037">
-              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -184,8 +92,8 @@
         <option value="$PROJECT_DIR$/src/URL/HTMLDownloader.java" />
         <option value="$PROJECT_DIR$/src/URL/URLConnector.java" />
         <option value="$PROJECT_DIR$/src/application/Controller.java" />
-        <option value="$PROJECT_DIR$/src/URL/Parser.java" />
         <option value="$PROJECT_DIR$/src/URL/StringIterator.java" />
+        <option value="$PROJECT_DIR$/src/URL/Parser.java" />
         <option value="$PROJECT_DIR$/src/model/Item.java" />
         <option value="$PROJECT_DIR$/src/tests/ParserTests.java" />
       </list>
@@ -220,16 +128,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PriceWatcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -282,6 +180,84 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="other" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="other" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="files" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PriceWatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -581,12 +557,14 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30411828" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.146875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -594,14 +572,12 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30411828" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -647,7 +623,9 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="7" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -729,6 +707,8 @@
           <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -747,6 +727,8 @@
           <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -757,6 +739,8 @@
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -806,6 +790,8 @@
           <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -824,6 +810,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -863,6 +851,8 @@
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -888,6 +878,8 @@
           <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -913,6 +905,8 @@
           <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -967,25 +961,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66594124" vertical-offset="0" max-vertical-offset="1411">
-          <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/easysql/Build.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
           <caret line="9" column="56" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other/files/Classic SuperBreak Backpack.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36468646" vertical-offset="23494" max-vertical-offset="57596">
-          <caret line="1395" column="82" selection-start-line="1395" selection-start-column="75" selection-end-line="1395" selection-end-column="82" />
         </state>
       </provider>
     </entry>
@@ -1004,29 +983,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9630033" vertical-offset="1036" max-vertical-offset="2499">
-          <caret line="138" column="56" selection-start-line="138" selection-start-column="56" selection-end-line="138" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Shipping.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-          <folding>
-            <element signature="e#343#344#0" expanded="true" />
-            <element signature="e#368#369#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,16 +999,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/ParserTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="582" max-vertical-offset="2159">
-          <caret line="60" column="39" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/URL/StringIterator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="118" max-vertical-offset="1037">
@@ -1056,11 +1007,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1090" max-vertical-offset="2346">
+          <caret line="86" column="64" selection-start-line="86" selection-start-column="64" selection-end-line="86" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1868" max-vertical-offset="2499">
+          <caret line="143" column="48" selection-start-line="143" selection-start-column="48" selection-end-line="143" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other/files/Classic SuperBreak Backpack.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="23490" max-vertical-offset="57596">
+          <caret line="1395" column="88" selection-start-line="1395" selection-start-column="75" selection-end-line="1395" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/URL/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21980414" vertical-offset="954" max-vertical-offset="2261">
-          <caret line="72" column="57" selection-start-line="72" selection-start-column="57" selection-end-line="72" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="2278">
+          <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/ParserTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3058637" vertical-offset="810" max-vertical-offset="2261">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
