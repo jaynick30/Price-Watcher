@@ -60,6 +60,7 @@ public class Controller {
 
     private Parser parser;
 	private Manager itemBase;
+	private ArrayList<Item> items;
     private String currentURL;
     private final WebView browser = new WebView();
     private final WebEngine webEngine = browser.getEngine();
@@ -68,12 +69,8 @@ public class Controller {
 	
 	@FXML
 	private void initialize(){
-		try {
-			itemBase = new Manager("Items");
-			itemBase.createTable();
-		}
-		catch (ClassNotFoundException e) {e.printStackTrace();}
-		catch (SQLException e) {e.printStackTrace();}
+		itemBase = new Manager("Items");
+		itemBase.createTable();
 
         hideBrowser();
 		
