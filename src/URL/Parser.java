@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.net.MalformedURLException;
+
 public class Parser {
     private StringIterator iterator = new StringIterator();
     private URLConnector connector = new URLConnector();
@@ -21,7 +23,7 @@ public class Parser {
 
     public Parser() {}
 
-    public Item parse(String url) {
+    public Item parse(String url) throws MalformedURLException {
         Document doc = connector.connect(url);
         System.out.println(doc.toString());
         return setValues(doc, url);

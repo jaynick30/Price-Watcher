@@ -24,6 +24,7 @@ import model.Item;
 import model.Point;
 import model.PriceGraph;
 
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class Controller {
 	public ObservableList<HBox> priceList = FXCollections.observableArrayList();
 	public ObservableList<Hyperlink> siteList = FXCollections.observableArrayList();
 
-    private Parser parser;
+    private Parser parser = new Parser();
 	private Manager itemBase;
 	private ArrayList<Item> items;
     private String currentURL;
@@ -80,41 +81,26 @@ public class Controller {
 		products.setFixedCellSize(30);
 		prices.setFixedCellSize(30);
 		sites.setFixedCellSize(30);
-	}
-	
-	private void addPrice(Item item){
-		HBox hbox = new HBox();
-		hbox.setAlignment(Pos.CENTER);
-		Text text = new Text();
-		text.setText(item.price);
-		ImageView arrow = new ImageView();
-		Image image = new Image("file:GrayLine.png");
-		arrow.setImage(image);
-		arrow.setFitHeight(3);
-		arrow.setFitWidth(15);
-		hbox.getChildren().addAll(text, arrow);
-		priceList.add(hbox);
-		if(item.shipping.equals("1")){
-			Text shipping = new Text(" + free shipping!");
-			hbox.getChildren().add(shipping);
-		}
+        populateItems();
 	}
 	
 	@FXML
 	public void addItem(){
-		Hyperlink hyper = new Hyperlink();
 		String url = urlTextField.getText();
-		hyper = createHyperlink(url);
-		Item item = parser.parse(url);
-		String newProduct = item.title;
-		String newPrice = item.price;
-		itemBase.addItem(item);
-		items.add(item);
-		
-		productList.add(newProduct);
-		addPrice(item);
-		siteList.add(hyper);
-		urlTextField.clear();
+		Hyperlink hyper = createHyperlink(url);
+        try {
+            Item item = parser.parse(url);
+            itemBase.addItem(item);
+            items.add(item);
+
+            productList.add(item.title);
+            addPrice(item);
+            siteList.add(hyper);
+            urlTextField.clear();
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public void update() throws SQLException {
@@ -132,9 +118,44 @@ public class Controller {
 			//TODO: draw recentPoints on a pane
 		}
 		catch (SQLException e) {e.printStackTrace();}
-		
-		
 	}
+
+    public void updatePrice() {
+
+    }
+
+    private void populateItems() {
+        items = itemBase.getAllRecent();
+        for (int i=0; i < items.size(); i++) {
+            Item temp = items.get(i);
+            productList.add(temp.title);
+            addPrice(temp);
+            Hyperlink link = createHyperlink(temp.url);
+            siteList.add(link);
+        }
+    }
+
+    private void addPrice(Item item){
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+        Text text = new Text(item.price);
+        ImageView arrow = createArrow();
+        hbox.getChildren().addAll(text, arrow);
+        priceList.add(hbox);
+        if(item.shipping.isFree() == "1") {
+            Text shipping = new Text(" + free shipping!");
+            hbox.getChildren().add(shipping);
+        }
+    }
+
+    private ImageView createArrow() {
+        ImageView arrow = new ImageView();
+        Image image = new Image("file:GrayLine.png");
+        arrow.setImage(image);
+        arrow.setFitHeight(3);
+        arrow.setFitWidth(15);
+        return arrow;
+    }
 	
 	private Hyperlink createHyperlink(final String url){
 		Hyperlink hyper = new Hyperlink();

@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 
 public class URLConnector {
@@ -12,7 +13,7 @@ public class URLConnector {
 
     }
 
-    public Document connect(String url) {
+    public Document connect(String url) throws MalformedURLException {
         try {
             Document doc = Jsoup.connect(url).get();
             return doc;

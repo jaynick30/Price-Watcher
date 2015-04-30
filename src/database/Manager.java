@@ -9,6 +9,7 @@ import java.sql.Statement;
 import model.Item;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import javax.naming.spi.DirStateFactory.Result;
 
@@ -70,9 +71,19 @@ public class Manager {
 		}
 	}
 	
-	public ResultSet getItem(Item item) {
-		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' ORDER BY idx DESCENDING";
-		try{return statement.executeQuery(query);}
+	public ArrayList<Item> getAll(Item item) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' ORDER BY idx ASCENDING";
+		try{
+			ResultSet result = statement.executeQuery(query);
+			while(result.next()){
+				Item resultItem = new Item(result.getString("url"));
+				resultItem.title = result.getString("name");
+				resultItem.price = result.getString("price");
+				resultItem.setShipping(result.getBoolean("shipping"));
+				items.add(resultItem);
+			}
+		}
 		catch (SQLException e) {errorMessage = "unable to find items";}
 		return null;
 	}
@@ -88,10 +99,32 @@ public class Manager {
 			resultItem.setShipping(result.getBoolean("shipping"));
 			return resultItem;
 		}
-		catch (SQLException e) {errorMessage = "unable to find item";}
-		finally{System.out.println(errorMessage);}
+		catch (SQLException e) {
+			errorMessage = "unable to find item";
+			System.out.println(errorMessage);
+		}
 		return null;
 		}
+	
+	public ArrayList<Item> getAllRecent() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		String query = "SELECT * FROM " + table + " WHERE idx = 0";
+		try{
+			ResultSet result = statement.executeQuery(query);
+			while(result.next()){
+				Item item = new Item(result.getString("url"));
+				item.title = result.getString("name");
+				item.price = result.getString("price");
+				item.setShipping(result.getBoolean("shipping"));
+				items.add(item);
+			}
+		}
+		catch (SQLException e) {
+			errorMessage = "unable to find items";
+			System.out.println(errorMessage);
+		}
+		return items;
+	}
 	
 	public void dropTable() {
 		String query = "DROP TABLE " + table;
