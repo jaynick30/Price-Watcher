@@ -81,7 +81,7 @@ public class ParserTests {
     }
 
     @Test
-    public void testPrint() {
+    public void testKindle() {
         testItem(kindle, kindleFileName);
     }
 

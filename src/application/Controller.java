@@ -82,36 +82,15 @@ public class Controller {
 		sites.setFixedCellSize(30);
 	}
 	
-	private void addPrice(Item item){
-		HBox hbox = new HBox();
-		hbox.setAlignment(Pos.CENTER);
-		Text text = new Text();
-		text.setText(item.price);
-		ImageView arrow = new ImageView();
-		Image image = new Image("file:GrayLine.png");
-		arrow.setImage(image);
-		arrow.setFitHeight(3);
-		arrow.setFitWidth(15);
-		hbox.getChildren().addAll(text, arrow);
-		priceList.add(hbox);
-		if(item.shipping.equals("1")){
-			Text shipping = new Text(" + free shipping!");
-			hbox.getChildren().add(shipping);
-		}
-	}
-	
 	@FXML
 	public void addItem(){
-		Hyperlink hyper = new Hyperlink();
 		String url = urlTextField.getText();
-		hyper = createHyperlink(url);
+		Hyperlink hyper = createHyperlink(url);
 		Item item = parser.parse(url);
-		String newProduct = item.title;
-		String newPrice = item.price;
 		itemBase.addItem(item);
 		items.add(item);
 		
-		productList.add(newProduct);
+		productList.add(item.title);
 		addPrice(item);
 		siteList.add(hyper);
 		urlTextField.clear();
@@ -132,9 +111,29 @@ public class Controller {
 			//TODO: draw recentPoints on a pane
 		}
 		catch (SQLException e) {e.printStackTrace();}
-		
-		
 	}
+
+    private void addPrice(Item item){
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+        Text text = new Text(item.price);
+        ImageView arrow = createArrow();
+        hbox.getChildren().addAll(text, arrow);
+        priceList.add(hbox);
+        if(item.shipping.isFree() == "1") {
+            Text shipping = new Text(" + free shipping!");
+            hbox.getChildren().add(shipping);
+        }
+    }
+
+    private ImageView createArrow() {
+        ImageView arrow = new ImageView();
+        Image image = new Image("file:GrayLine.png");
+        arrow.setImage(image);
+        arrow.setFitHeight(3);
+        arrow.setFitWidth(15);
+        return arrow;
+    }
 	
 	private Hyperlink createHyperlink(final String url){
 		Hyperlink hyper = new Hyperlink();
