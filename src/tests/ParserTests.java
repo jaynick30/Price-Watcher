@@ -11,9 +11,11 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ParserTests {
     private Parser parser = new Parser();
@@ -68,12 +70,12 @@ public class ParserTests {
 
     @Test
     public void testConnect() {
-        item = parser.parse(kindle.url);
+        item = parse(kindle.url);
     }
 
     @Test
     public void testDatabaseConnect() {
-        item = parser.parse(kindle.url);
+        item = parse(kindle.url);
         checkItem(kindle);
         manager.addItem(item);
         System.out.println("item");
@@ -96,13 +98,23 @@ public class ParserTests {
     }
 
     @Test
-    public void testBackpackURL() { testItem(backpack, backpackFileName);}//TODO fix shipping
+    public void testBackpackURL() { testItem(backpack, backpackFileName);}
 
     @Test
     public void testArtURL() {
         testItem(art, artFileName);
     }
 
+
+    private Item parse(String url) {
+        try {
+            return parser.parse(url);
+        }
+        catch (MalformedURLException e) {
+            fail();
+        }
+        return null;
+    }
     private void testItem(Item testItem, String fileName) {
         doc = getDocument(testItem, fileName);
         item = parser.setValues(doc, testItem.url);

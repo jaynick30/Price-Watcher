@@ -81,6 +81,7 @@ public class Controller {
 		products.setFixedCellSize(30);
 		prices.setFixedCellSize(30);
 		sites.setFixedCellSize(30);
+        populateItems();
 	}
 	
 	@FXML
@@ -121,6 +122,17 @@ public class Controller {
 
     public void updatePrice() {
 
+    }
+
+    private void populateItems() {
+        items = itemBase.getAllRecent();
+        for (int i=0; i < items.size(); i++) {
+            Item temp = items.get(i);
+            productList.add(temp.title);
+            addPrice(temp);
+            Hyperlink link = createHyperlink(temp.url);
+            siteList.add(link);
+        }
     }
 
     private void addPrice(Item item){
