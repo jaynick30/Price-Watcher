@@ -1,12 +1,5 @@
-<<<<<<< Updated upstream
 /URL/
-/application/
 /database/
-/easysql/
+/application/
 /model/
 /tests/
-=======
-/model/
-/database/
-/application/
->>>>>>> Stashed changes

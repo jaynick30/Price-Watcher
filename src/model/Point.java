@@ -1,10 +1,10 @@
 package model;
 
 public class Point {
-	public float x;
+	public int x;
 	public float y;
 	
-	public Point(float x, float y) {
+	public Point(int x, float y) {
 		this.x = x;
 		this.y = y;
 	}

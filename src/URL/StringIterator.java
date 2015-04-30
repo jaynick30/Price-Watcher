@@ -1,5 +1,7 @@
 package URL;
 
+import model.Shipping;
+
 public class StringIterator {
     private String freeShippingText;
     private char startPriceChar;
@@ -17,9 +19,9 @@ public class StringIterator {
         return iterateLine(s, startTitleChar, endTitleChar);
     }
 
-    public String getShipping(String s) {
-        if (s.contains(freeShippingText)) {return "1";}
-        return "0";
+    public Shipping getShipping(String s) {
+        if (s.contains(freeShippingText)) {return Shipping.FREE;}
+        return Shipping.PAID;
     }
 
     public void amazonStringParsing() {

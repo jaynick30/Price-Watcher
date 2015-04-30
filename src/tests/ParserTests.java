@@ -1,7 +1,9 @@
 package tests;
 
 import URL.Parser;
+import database.Manager;
 import model.Item;
+import model.Shipping;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -23,47 +25,58 @@ public class ParserTests {
     private Item game;
     private Item backpack;
     private Item art;
+    private Manager manager = new Manager("Test");
 
     private String testFileName, bookFileName, gameFileName, backpackFileName, artFileName;
 
     @Before
     public void initialize() {
+    	manager.createTable();
+    	
         test = new Item("http://www.amazon.com/gp/product/B00IOY8XWQ/ref=s9_psimh_gw_p349_d0_i2?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=desktop-1&pf_rd_r=1GFJPB3F15ZGZ6GGH4AV&pf_rd_t=36701&pf_rd_p=2079475182&pf_rd_i=desktop");
         test.price = "$199.00";
         test.title = "Kindle Voyage";
-        test.shipping = "0";
+        test.setShipping(Shipping.FREE);
 
         book = new Item("http://www.amazon.com/Memory-Amos-Decker-David-Baldacci/dp/1455559822/ref=sr_1_1?s=books&ie=UTF8&qid=1429838562&sr=1-1&keywords=book");
         book.price = "$14.67";
         book.title = "Memory Man (Amos Decker series)";
-        book.shipping = "0";
+        book.setShipping(Shipping.PAID);
 
         game = new Item("http://www.amazon.com/Bloodborne-PlayStation-4/dp/B00KVR4HEC/ref=sr_1_1?ie=UTF8&qid=1429839651&sr=8-1&keywords=bloodborne");
         game.price = "$59.02";
         game.title = "Bloodborne";
-        game.shipping = "1";
+        game.setShipping(Shipping.FREE);
 
         backpack = new Item("http://www.amazon.com/JanSport-Superbreak-Classic-Backpack-Black/dp/B0007QCQGI/ref=sr_1_1?ie=UTF8&qid=1430147820&sr=8-1&keywords=backpack");
         backpack.price = "$30.50";
         backpack.title = "Classic SuperBreak Backpack";
-        backpack.shipping = "1";
+        backpack.setShipping(Shipping.FREE);
 
         art = new Item("http://www.amazon.com/The-Artist-and-His-Wife/dp/B00E9EC28G/ref=sr_1_1?ie=UTF8&qid=1430271197&sr=8-1&keywords=fine+art");
         art.price = "$285,000.00";
         art.title = "The Artist and His Wife";
-        art.shipping = "1";
+        art.setShipping(Shipping.FREE);
 
         testFileName = "Kindle Voyage";
         bookFileName = "Memory Man";
         gameFileName = "Bloodborne";
         backpackFileName = "Classic SuperBreak Backpack";
         artFileName = "The Artist and His Wife";
-    }
 
+    }
 
     @Test
     public void testPrint() {
         testItem(test, testFileName);
+    }
+    @Test
+    public void testPrint2() {
+        item = parser.parse(test.url);
+        checkItem(test);
+        manager.addItem(item);
+        System.out.println("item");
+        assertEquals(manager.getMostRecent(item), item);
     }
 
     @Test
@@ -77,7 +90,7 @@ public class ParserTests {
     }
 
     @Test
-    public void testBackpackURL() { testItem(backpack, backpackFileName);}
+    public void testBackpackURL() { testItem(backpack, backpackFileName);}//TODO fix shipping
 
     @Test
     public void testArtURL() {
