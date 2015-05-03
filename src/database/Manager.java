@@ -72,8 +72,8 @@ public class Manager {
 	}
 	
 	public ArrayList<Item> getAll(Item item) {
-		ArrayList<Item> items = new ArrayList<Item>();
-		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' ORDER BY idx ASCENDING";
+		ArrayList<Item> items = new ArrayList<>();
+		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' ORDER BY idx desc";
 		try{
 			ResultSet result = statement.executeQuery(query);
 			while(result.next()){
@@ -83,13 +83,32 @@ public class Manager {
 				resultItem.setShipping(result.getBoolean("shipping"));
 				items.add(resultItem);
 			}
+			return items;
 		}
 		catch (SQLException e) {errorMessage = "unable to find items";}
-		return null;
+		return items;
+	}
+	
+	public ArrayList<Item> getAll() {
+		ArrayList<Item> items = new ArrayList<>();
+		String query = "SELECT * FROM " + table;
+		try{
+			ResultSet result = statement.executeQuery(query);
+			while(result.next()){
+				Item resultItem = new Item(result.getString("url"));
+				resultItem.title = result.getString("name");
+				resultItem.price = result.getString("price");
+				resultItem.setShipping(result.getBoolean("shipping"));
+				items.add(resultItem);
+			}
+			return items;
+		}
+		catch (SQLException e) {errorMessage = "unable to find items";}
+		return items;
 	}
 	
 	public Item getAtIndex(Item item, Integer index) {
-		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' AND idx = " + index.toString();
+		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' AND idx = " + index;
 		try{
 			ResultSet result = statement.executeQuery(query);
 			result.next();
