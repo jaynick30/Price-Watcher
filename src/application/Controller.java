@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import model.Item;
 import model.Point;
 import model.PriceGraph;
+import model.StringIterator;
 
 import java.net.MalformedURLException;
 import java.sql.SQLException;
@@ -51,6 +52,7 @@ public class Controller {
 	public ObservableList<HBox> priceList = FXCollections.observableArrayList();
 	public ObservableList<Hyperlink> siteList = FXCollections.observableArrayList();
 
+    private StringIterator iterator;
     private Parser parser = new Parser();
 	private Manager itemBase;
 	private ArrayList<Item> items;
@@ -93,21 +95,12 @@ public class Controller {
 	
 	private void watchItem(String url) throws MalformedURLException{
 		try{
-			Hyperlink hyper = new Hyperlink();
-			hyper = createHyperlink(url);
+			Hyperlink hyper = createHyperlink(url);
+            siteList.add(hyper);
 			Parser parser = new Parser();
-			Item item = new Item(url);
-		
-			item = parser.parse(url);
-			String newProduct = item.title;
-			if (!newProduct.equals(null)){
-				String newPrice = item.price;
-				itemBase.addItem(item);
-		
-				productList.add(newProduct);
-				addPrice(newPrice);
-				siteList.add(hyper);
-			}
+			Item item = parser.parse(url);
+            addItem(item);
+
 		}
 		catch(NullPointerException e){
 			throwError("URLException");
@@ -115,8 +108,6 @@ public class Controller {
 	}
 	
 	public void throwError(String errorType){
-		//String URLException = "URLException";
-		//if(errorType.equals(URLException)){
 			VBox bounds = new VBox();
 			bounds.setSpacing(10);
 			HBox buttonBox = new HBox();
@@ -125,23 +116,13 @@ public class Controller {
 			bounds.setAlignment(Pos.CENTER);
 			buttonBox.setAlignment(Pos.CENTER);
 			Scene scene = new Scene(bounds, 250, 75);
-			Stage stage = new Stage();
+			final Stage stage = new Stage();
 			stage.setTitle("error");
 			Button okButton = new Button("Ok");
 			Button cancelButton = new Button("cancel");
-			okButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					stage.close();
-				}
-	        });
-			cancelButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					stage.close();
-				}
-	        });
-			
+			okButton.setOnAction((e) -> {stage.close();});
+			cancelButton.setOnAction((e) -> stage.close());
+
 			Label errorMessage = new Label("Item not found");
 			
 			buttonBox.getChildren().addAll(okButton, cancelButton);
@@ -151,10 +132,6 @@ public class Controller {
 	        stage.setScene(scene);
 	        stage.show();
 	        System.out.println("Error thrown");
-		//}
-		//else{
-			
-		//}
 	}
 	
 	@FXML
@@ -182,7 +159,7 @@ public class Controller {
 		bounds.setMinSize(350, 200);
 		bounds.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(bounds, 350, 200);
-		Stage stage = new Stage();
+		final Stage stage = new Stage();
 		stage.setTitle("Select a Browser");
 		Button amazonButton = new Button("Amazon");
 		amazonButton.setMinSize(100, 50);
@@ -226,7 +203,7 @@ public class Controller {
 	private void createBrowser(String url){
 		 VBox vbox = new VBox();
          Scene scene = new Scene(vbox);
-         Stage stage = new Stage();
+         final Stage stage = new Stage();
          stage.setTitle(url);
          ArrayList<String> listOfPages = new ArrayList<String>();
          listOfPages.add(url);
@@ -298,20 +275,29 @@ public class Controller {
 		 hyper.setOnAction(new EventHandler<ActionEvent>() {
              @Override
              public void handle(ActionEvent e) {
-            	createBrowser(url);
+                 createBrowser(url);
              }
          });
 		 return hyper;
 	}
+
+    private void addItem(Item item) {
+        if (!item.title.equals(null)){
+            String newPrice = item.price;
+            itemBase.addItem(item);
+            productList.add(item.title);
+            addPrice(newPrice);
+        }
+    }
 	
-	public void update() throws SQLException {
+	private void update() throws SQLException {
 		for (int i = 0; i < items.size(); i++) {
 			Item update = itemBase.getMostRecent(items.get(i));
 			items.set(i, update);
 		}
 	}
 	
-	public void drawPriceGraph(Item item) {
+	private void drawPriceGraph(Item item) {
 		PriceGraphMaker maker = new PriceGraphMaker();
 		try{
 			PriceGraph graph = maker.makePriceGraph(item);
@@ -321,9 +307,6 @@ public class Controller {
 		catch (SQLException e) {e.printStackTrace();}
 	}
 
-    public void updatePrice() {
-
-    }
 
     private void populateItems() {
         items = itemBase.getAllRecent();
@@ -340,13 +323,17 @@ public class Controller {
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
         Text text = new Text(item.price);
-        ImageView arrow = createArrow();
-        hbox.getChildren().addAll(text, arrow);
+        ImageView image = getImage();
+        hbox.getChildren().addAll(text, image);
         priceList.add(hbox);
         if(item.shipping.isFree() == "1") {
             Text shipping = new Text(" + free shipping!");
             hbox.getChildren().add(shipping);
         }
+    }
+
+    private ImageView getImage() {
+        return createArrow();
     }
 
     private ImageView createArrow() {

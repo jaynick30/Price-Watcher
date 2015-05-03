@@ -1,6 +1,4 @@
-package URL;
-
-import model.Shipping;
+package model;
 
 public class StringIterator {
     private String freeShippingText;
@@ -32,6 +30,13 @@ public class StringIterator {
         freeShippingText = "FREE Shipping";
     }
 
+    public String getGreaterPrice(String price1, String price2) {
+        double p1 = getPrice(price1);
+        double p2 = getPrice(price2);
+        if (p1 > p2) {return price1;}
+        else if (p2 > p1) {return price2;}
+        return null;
+    }
 
     private String iterateLine(String s, char startChar, char endChar) {
         for (int i=0; i<s.length(); i++) {
@@ -57,5 +62,10 @@ public class StringIterator {
 
     private String manageString(String s) {
         return s.replace("&quot;",""+'"');
+    }
+
+    private double getPrice(String price) {
+        String temp = price.substring(1,price.length()-1);
+        return Double.valueOf(temp);
     }
 }
