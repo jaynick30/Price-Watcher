@@ -50,8 +50,7 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="0.0" prefWidth="644.0">
          <children>
-            <ComboBox fx:id="categorySelection" layoutX="41.0" layoutY="3.0" prefHeight="25.0" prefWidth="135.0" promptText="Set Category" />
-            <Button fx:id="addCategory" layoutX="2.0" layoutY="1.0" mnemonicParsing="false" text="+" textFill="#1f43f8">
+            <Button fx:id="updateItems" layoutX="42.0" layoutY="1.0" mnemonicParsing="false" onAction="#manualUpdate" text="Update Items" textFill="#1f43f8">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -82,12 +81,12 @@
                   </HBox>
                </content>
             </ScrollPane>
-            <Button fx:id="addURL" layoutX="220.0" layoutY="1.0" mnemonicParsing="false" onAction="#addItem" text="Add" textFill="#2545e4">
+            <Button fx:id="addURL" layoutX="201.0" layoutY="1.0" mnemonicParsing="false" onAction="#addItem" text="Add" textFill="#2545e4">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <TextField fx:id="urlTextField" layoutX="275.0" layoutY="4.0" onAction="#addItem" promptText="Add URL here..." />
+            <TextField fx:id="urlTextField" layoutX="256.0" layoutY="4.0" onAction="#addItem" promptText="Add URL here..." />
             <Button fx:id="startShopping" layoutX="461.0" layoutY="2.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#browserSelctionMenu" prefWidth="150.0" text="Shop!" />
          </children>
     </AnchorPane>

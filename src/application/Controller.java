@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import model.Item;
 import model.Point;
 import model.PriceGraph;
+import model.StringIterator;
 
 import java.net.MalformedURLException;
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class Controller {
 	@FXML
 	ComboBox<?> categorySelection;
 	@FXML
-	Button addCategory, addURL, nameButton, priceButton, siteButton, startShopping;
+	Button addCategory, addURL, nameButton, priceButton, siteButton, startShopping, updateItems;
 	@FXML
 	TextField urlTextField;
 	@FXML
@@ -51,6 +52,7 @@ public class Controller {
 	public ObservableList<HBox> priceList = FXCollections.observableArrayList();
 	public ObservableList<Hyperlink> siteList = FXCollections.observableArrayList();
 
+    private StringIterator iterator;
     private Parser parser = new Parser();
 	private Manager itemBase;
 	private ArrayList<Item> items;
@@ -61,7 +63,7 @@ public class Controller {
 
 	
 	@FXML
-	private void initialize(){
+	private void initialize() throws MalformedURLException{
 		itemBase = new Manager("Items");
 		itemBase.createTable();
 
@@ -75,26 +77,48 @@ public class Controller {
 		prices.setFixedCellSize(30);
 		sites.setFixedCellSize(30);
         populateItems();
+        updateItems();
 	}
 	
-	private void addPrice(String newPrice){
+	private void updatePrice(Item item, String change, int index){
 		HBox hbox = new HBox();
 		hbox.setAlignment(Pos.CENTER);
+		String newPrice = item.price;
 		Text text = new Text();
 		text.setText(newPrice);
 		ImageView arrow = new ImageView();
-		Image image = new Image("file:GrayLine.png");
-		arrow.setImage(image);
-		arrow.setFitHeight(3);
-		arrow.setFitWidth(15);
+		if(change.equals("same")){
+			Image image = new Image("file:GrayLine.png");
+			arrow.setImage(image);
+			arrow.setFitHeight(3);
+			arrow.setFitWidth(15);
+		}
+		else if(change.equals("up")){
+			Image image = new Image("file:RedArrow.png");
+			arrow.setImage(image);
+			arrow.setFitHeight(15);
+			arrow.setFitWidth(15);
+		}
+		else if(change.equals("down")){
+			Image image = new Image("file:GreenArrow.png");
+			arrow.setImage(image);
+			arrow.setFitHeight(15);
+			arrow.setFitWidth(15);
+		}
+		else{
+			throwError("That price change does not exist!");
+		}
 		hbox.getChildren().addAll(text, arrow);
-		priceList.add(hbox);
+		priceList.add(index, hbox);
+		if(item.shipping.isFree() == "1") {
+			Text shipping = new Text(" + free shipping!");
+	        hbox.getChildren().add(shipping);
+	    }
 	}
 	
 	private void watchItem(String url) throws MalformedURLException{
 		try{
-			Hyperlink hyper = new Hyperlink();
-			hyper = createHyperlink(url);
+			Hyperlink hyper = createHyperlink(url);
 			Parser parser = new Parser();
 			Item item = new Item(url);
 		
@@ -103,9 +127,8 @@ public class Controller {
 			if (!newProduct.equals(null)){
 				String newPrice = item.price;
 				itemBase.addItem(item);
-		
 				productList.add(newProduct);
-				addPrice(newPrice);
+				addPrice(item);
 				siteList.add(hyper);
 			}
 		}
@@ -115,8 +138,6 @@ public class Controller {
 	}
 	
 	public void throwError(String errorType){
-		//String URLException = "URLException";
-		//if(errorType.equals(URLException)){
 			VBox bounds = new VBox();
 			bounds.setSpacing(10);
 			HBox buttonBox = new HBox();
@@ -125,23 +146,13 @@ public class Controller {
 			bounds.setAlignment(Pos.CENTER);
 			buttonBox.setAlignment(Pos.CENTER);
 			Scene scene = new Scene(bounds, 250, 75);
-			Stage stage = new Stage();
+			final Stage stage = new Stage();
 			stage.setTitle("error");
 			Button okButton = new Button("Ok");
 			Button cancelButton = new Button("cancel");
-			okButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					stage.close();
-				}
-	        });
-			cancelButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					stage.close();
-				}
-	        });
-			
+			okButton.setOnAction((e) -> {stage.close();});
+			cancelButton.setOnAction((e) -> stage.close());
+
 			Label errorMessage = new Label("Item not found");
 			
 			buttonBox.getChildren().addAll(okButton, cancelButton);
@@ -151,10 +162,6 @@ public class Controller {
 	        stage.setScene(scene);
 	        stage.show();
 	        System.out.println("Error thrown");
-		//}
-		//else{
-			
-		//}
 	}
 	
 	@FXML
@@ -182,7 +189,7 @@ public class Controller {
 		bounds.setMinSize(350, 200);
 		bounds.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(bounds, 350, 200);
-		Stage stage = new Stage();
+		final Stage stage = new Stage();
 		stage.setTitle("Select a Browser");
 		Button amazonButton = new Button("Amazon");
 		amazonButton.setMinSize(100, 50);
@@ -226,7 +233,7 @@ public class Controller {
 	private void createBrowser(String url){
 		 VBox vbox = new VBox();
          Scene scene = new Scene(vbox);
-         Stage stage = new Stage();
+         final Stage stage = new Stage();
          stage.setTitle(url);
          ArrayList<String> listOfPages = new ArrayList<String>();
          listOfPages.add(url);
@@ -298,20 +305,29 @@ public class Controller {
 		 hyper.setOnAction(new EventHandler<ActionEvent>() {
              @Override
              public void handle(ActionEvent e) {
-            	createBrowser(url);
+                 createBrowser(url);
              }
          });
 		 return hyper;
 	}
+
+    private void addItem(Item item) {
+        if (!item.title.equals(null)){
+            String newPrice = item.price;
+            itemBase.addItem(item);
+            productList.add(item.title);
+            addPrice(item);
+        }
+    }
 	
-	public void update() throws SQLException {
+	private void update() throws SQLException {
 		for (int i = 0; i < items.size(); i++) {
 			Item update = itemBase.getMostRecent(items.get(i));
 			items.set(i, update);
 		}
 	}
 	
-	public void drawPriceGraph(Item item) {
+	private void drawPriceGraph(Item item) {
 		PriceGraphMaker maker = new PriceGraphMaker();
 		try{
 			PriceGraph graph = maker.makePriceGraph(item);
@@ -321,9 +337,6 @@ public class Controller {
 		catch (SQLException e) {e.printStackTrace();}
 	}
 
-    public void updatePrice() {
-
-    }
 
     private void populateItems() {
         items = itemBase.getAllRecent();
@@ -335,18 +348,64 @@ public class Controller {
             siteList.add(link);
         }
     }
+    
+    @FXML
+    public void manualUpdate() throws MalformedURLException{
+    	updateItems();
+    }
+    
+    public void updateItems() throws MalformedURLException{
+    	items = itemBase.getAllRecent();
+    	for(int i = 0; i < items.size(); i++){
+    		Item oldItem = items.get(i);
+    		String oldPriceString = oldItem.price;
+    		oldPriceString = oldPriceString.substring(1);
+    		double oldPrice = Double.parseDouble(oldPriceString);
+    		
+    		String url = oldItem.url;
+    		Item newItem = new Item(url);
+    		newItem = parser.parse(url);
+    		String newPriceString = newItem.price;
+    		newPriceString = newPriceString.substring(1);
+    		double newPrice = Double.parseDouble(newPriceString);
+    		
+    		if(newPrice > oldPrice){
+    			priceList.remove(i);
+    			updatePrice(newItem, "up", i);
+    			System.out.println("The price has gone up!");
+    		}
+    		else if(newPrice < oldPrice){
+    			priceList.remove(i);
+    			updatePrice(newItem, "down", i);
+    			System.out.println("The price has gone down!");
+    		}
+    		else if(newPrice == oldPrice){
+    			System.out.println("The price is the same");
+    		}
+    		else{
+    			throwError("Cannot find the price!");
+    		}
+    		
+    	}
+    	
+    	
+    }
 
     private void addPrice(Item item){
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
         Text text = new Text(item.price);
-        ImageView arrow = createArrow();
-        hbox.getChildren().addAll(text, arrow);
+        ImageView image = getImage();
+        hbox.getChildren().addAll(text, image);
         priceList.add(hbox);
         if(item.shipping.isFree() == "1") {
             Text shipping = new Text(" + free shipping!");
             hbox.getChildren().add(shipping);
         }
+    }
+
+    private ImageView getImage() {
+        return createArrow();
     }
 
     private ImageView createArrow() {
