@@ -121,7 +121,6 @@ public class Controller {
 			Hyperlink hyper = createHyperlink(url);
             siteList.add(hyper);
 			Parser parser = new Parser();
-<<<<<<< HEAD
 			Item item = new Item(url);
 		
 			item = parser.parse(url);
@@ -134,11 +133,6 @@ public class Controller {
 				addPrice(item);
 				siteList.add(hyper);
 			}
-=======
-			Item item = parser.parse(url);
-            addItem(item);
-
->>>>>>> 49749f517af2d9ce5d523ba02054956edf09ec7e
 		}
 		catch(NullPointerException e){
 			throwError("URLException");
@@ -324,7 +318,7 @@ public class Controller {
             String newPrice = item.price;
             itemBase.addItem(item);
             productList.add(item.title);
-            addPrice(newPrice);
+            addPrice(item);
         }
     }
 	
