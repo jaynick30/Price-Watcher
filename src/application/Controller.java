@@ -119,7 +119,6 @@ public class Controller {
 	private void watchItem(String url) throws MalformedURLException{
 		try{
 			Hyperlink hyper = createHyperlink(url);
-            siteList.add(hyper);
 			Parser parser = new Parser();
 			Item item = new Item(url);
 		
@@ -128,7 +127,6 @@ public class Controller {
 			if (!newProduct.equals(null)){
 				String newPrice = item.price;
 				itemBase.addItem(item);
-		
 				productList.add(newProduct);
 				addPrice(item);
 				siteList.add(hyper);
