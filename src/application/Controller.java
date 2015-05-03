@@ -37,7 +37,7 @@ public class Controller {
 	@FXML
 	ComboBox<?> categorySelection;
 	@FXML
-	Button addCategory, addURL, nameButton, priceButton, siteButton, startShopping;
+	Button addCategory, addURL, nameButton, priceButton, siteButton, startShopping, updateItems;
 	@FXML
 	TextField urlTextField;
 	@FXML
@@ -61,7 +61,7 @@ public class Controller {
 
 	
 	@FXML
-	private void initialize(){
+	private void initialize() throws MalformedURLException{
 		itemBase = new Manager("Items");
 		itemBase.createTable();
 
@@ -75,20 +75,43 @@ public class Controller {
 		prices.setFixedCellSize(30);
 		sites.setFixedCellSize(30);
         populateItems();
+        updateItems();
 	}
 	
-	private void addPrice(String newPrice){
+	private void updatePrice(Item item, String change, int index){
 		HBox hbox = new HBox();
 		hbox.setAlignment(Pos.CENTER);
+		String newPrice = item.price;
 		Text text = new Text();
 		text.setText(newPrice);
 		ImageView arrow = new ImageView();
-		Image image = new Image("file:GrayLine.png");
-		arrow.setImage(image);
-		arrow.setFitHeight(3);
-		arrow.setFitWidth(15);
+		if(change.equals("same")){
+			Image image = new Image("file:GrayLine.png");
+			arrow.setImage(image);
+			arrow.setFitHeight(3);
+			arrow.setFitWidth(15);
+		}
+		else if(change.equals("up")){
+			Image image = new Image("file:RedArrow.png");
+			arrow.setImage(image);
+			arrow.setFitHeight(15);
+			arrow.setFitWidth(15);
+		}
+		else if(change.equals("down")){
+			Image image = new Image("file:GreenArrow.png");
+			arrow.setImage(image);
+			arrow.setFitHeight(15);
+			arrow.setFitWidth(15);
+		}
+		else{
+			throwError("That price change does not exist!");
+		}
 		hbox.getChildren().addAll(text, arrow);
-		priceList.add(hbox);
+		priceList.add(index, hbox);
+		if(item.shipping.isFree() == "1") {
+			Text shipping = new Text(" + free shipping!");
+	        hbox.getChildren().add(shipping);
+	    }
 	}
 	
 	private void watchItem(String url) throws MalformedURLException{
@@ -105,7 +128,7 @@ public class Controller {
 				itemBase.addItem(item);
 		
 				productList.add(newProduct);
-				addPrice(newPrice);
+				addPrice(item);
 				siteList.add(hyper);
 			}
 		}
@@ -334,6 +357,48 @@ public class Controller {
             Hyperlink link = createHyperlink(temp.url);
             siteList.add(link);
         }
+    }
+    
+    @FXML
+    public void manualUpdate() throws MalformedURLException{
+    	updateItems();
+    }
+    
+    public void updateItems() throws MalformedURLException{
+    	items = itemBase.getAllRecent();
+    	for(int i = 0; i < items.size(); i++){
+    		Item oldItem = items.get(i);
+    		String oldPriceString = oldItem.price;
+    		oldPriceString = oldPriceString.substring(1);
+    		double oldPrice = Double.parseDouble(oldPriceString);
+    		
+    		String url = oldItem.url;
+    		Item newItem = new Item(url);
+    		newItem = parser.parse(url);
+    		String newPriceString = newItem.price;
+    		newPriceString = newPriceString.substring(1);
+    		double newPrice = Double.parseDouble(newPriceString);
+    		
+    		if(newPrice > oldPrice){
+    			priceList.remove(i);
+    			updatePrice(newItem, "up", i);
+    			System.out.println("The price has gone up!");
+    		}
+    		else if(newPrice < oldPrice){
+    			priceList.remove(i);
+    			updatePrice(newItem, "down", i);
+    			System.out.println("The price has gone down!");
+    		}
+    		else if(newPrice == oldPrice){
+    			System.out.println("The price is the same");
+    		}
+    		else{
+    			throwError("Cannot find the price!");
+    		}
+    		
+    	}
+    	
+    	
     }
 
     private void addPrice(Item item){
