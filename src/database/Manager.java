@@ -38,12 +38,12 @@ public class Manager {
 		String create = "CREATE TABLE " + table + " (name STRING, price STRING, shipping STRING, url STRING, idx REAL)";
 		try{statement.execute(create);}
 		catch (SQLException e) {
-			errorMessage = "unable to create table";
+			errorMessage = "unable to create table, may already exist";
 			System.out.println(errorMessage);
 		}
 	}
 	
-	public void updateTable(Item item) {
+	private void updateTable(Item item) {
 		String update = "UPDATE " + table + " SET idx = idx + 1 WHERE name = '" + item.title + "' AND url = '" + item.url + "'";
 		try{statement.execute(update);}
 		catch (SQLException e) {
@@ -88,8 +88,8 @@ public class Manager {
 		return null;
 	}
 	
-	public Item getMostRecent(Item item) {
-		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' AND idx = 0";
+	public Item getAtIndex(Item item, Integer index) {
+		String query = "SELECT * FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "' AND idx = " + index.toString();
 		try{
 			ResultSet result = statement.executeQuery(query);
 			result.next();
@@ -105,6 +105,11 @@ public class Manager {
 		}
 		return null;
 		}
+	
+	public Item getMostRecent(Item item) {
+		return getAtIndex(item, 0);
+	}
+	
 	
 	public ArrayList<Item> getAllRecent() {
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -136,41 +141,4 @@ public class Manager {
 	}
 	
 	
-	
-	
-	
-	
-	
-	public void deleteAllNamed(String name) {
-		String delete = "DELETE FROM " + table + " WHERE name = " + name;
-		try{statement.executeQuery(delete);}
-		catch(SQLException e) {
-			errorMessage = "unable to delete items";
-			e.printStackTrace();
-		}
-	}
-	
-	public ResultSet getAllFromUrl(String url) {
-		String query = "SELECT * FROM " + table + "WHERE url = " + url + " ORDER BY index ASCENDING";
-		try{return statement.executeQuery(query);}
-		catch (SQLException e) {errorMessage = "unable to find item";}
-		finally {System.out.println(errorMessage);}
-		return null;
-	}
-	
-	public ResultSet getAllFromUrlNamed(String url, String name) {
-		String query = "SELECT * FROM " + table + "WHERE name = " + name + " AND url = " + url + " ORDER BY index ASCENDING";
-		try{return statement.executeQuery(query);}
-		catch (SQLException e) {errorMessage = "unable to find item";}
-		finally {System.out.println(errorMessage);}
-		return null;
-	}
-	
-	public ResultSet getMostRecentUpdate() {
-		String query = "SELECT MAX(timeStamp) FROM " + table;
-		try{return statement.executeQuery(query);}
-		catch(SQLException e) {errorMessage = "unable to retrieve update";}
-		finally {System.out.println(errorMessage);}
-		return null;
-	}
 }

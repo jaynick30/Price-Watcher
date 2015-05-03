@@ -27,7 +27,7 @@ public class ParserTests {
     private Item game;
     private Item backpack;
     private Item art;
-    private Manager manager = new Manager("Test");
+    private Manager manager = new Manager("ParserTest");
 
     private String kindleFileName, bookFileName, gameFileName, backpackFileName, artFileName;
 
