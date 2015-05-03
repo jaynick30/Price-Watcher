@@ -73,14 +73,7 @@ public class Controller {
 		itemBase.createTable();
 
         hideBrowser();
-		
-		products.setItems(productList);
-		prices.setItems(priceList);
-        sites.setItems(siteList);
-		 
-		products.setFixedCellSize(30);
-		prices.setFixedCellSize(30);
-		sites.setFixedCellSize(30);
+        initializeListViews();
         populateItems();
 	}
 	
@@ -155,6 +148,18 @@ public class Controller {
         arrow.setFitHeight(3);
         arrow.setFitWidth(15);
         return arrow;
+    }
+
+    private void initializeListViews() {
+        prices.setEditable(true);
+
+        products.setItems(productList);
+        prices.setItems(priceList);
+        sites.setItems(siteList);
+
+        products.setFixedCellSize(30);
+        prices.setFixedCellSize(30);
+        sites.setFixedCellSize(30);
     }
 	
 	private Hyperlink createHyperlink(final String url){

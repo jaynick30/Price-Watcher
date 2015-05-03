@@ -14,7 +14,6 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("GUI.fxml"));
 			VBox root = (VBox) loader.load();
-			
 			Scene scene = new Scene(root,640, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
