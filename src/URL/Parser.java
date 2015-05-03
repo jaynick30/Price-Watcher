@@ -2,6 +2,7 @@ package URL;
 
 import model.Item;
 import model.Shipping;
+import model.StringIterator;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
