@@ -193,11 +193,12 @@ public class Controller {
 		stage.setTitle("Select a Browser");
 		Button amazonButton = new Button("Amazon");
 		amazonButton.setMinSize(100, 50);
+		/*
 		Button ebayButton = new Button("eBay");
 		ebayButton.setMinSize(100, 50);
 		Button newEggButton = new Button("newEgg");
 		newEggButton.setMinSize(100, 50);
-		
+		*/
 		amazonButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -205,6 +206,7 @@ public class Controller {
 				stage.close();
 			}
         });
+		/*
 		ebayButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -219,8 +221,8 @@ public class Controller {
 				stage.close();
 			}
         });
-		
-		bounds.getChildren().addAll(amazonButton, ebayButton, newEggButton);
+		*/
+		bounds.getChildren().addAll(amazonButton);//, ebayButton, newEggButton);
         VBox.setVgrow(bounds, Priority.ALWAYS);
         
         stage.setScene(scene);
@@ -235,8 +237,6 @@ public class Controller {
          Scene scene = new Scene(vbox);
          final Stage stage = new Stage();
          stage.setTitle(url);
-         ArrayList<String> listOfPages = new ArrayList<String>();
-         listOfPages.add(url);
          HBox buttonBox = new HBox();
          buttonBox.setSpacing(10);
          Button addSite = new Button("Watch this item!");
@@ -245,19 +245,27 @@ public class Controller {
          Button previous = new Button("<--");
          buttonBox.getChildren().addAll(addSite, switchBrowsers, addBrowser);
      
-         final WebView browser = new WebView();
-	     final WebEngine webEngine = browser.getEngine();
+         WebView browser = new WebView();
+	     WebEngine webEngine = browser.getEngine();
          webEngine.load(url);
-         
          
          previous.setOnAction(new EventHandler<ActionEvent>() {
         	 @Override
         	 public void handle(ActionEvent e) {
-        		 WebHistory history = webEngine.getHistory();
-        		 String previousPage = history.getEntries().get(history.getEntries().size()-2).getUrl();
-        		 webEngine.load(previousPage);
-        		 System.out.println("Loading " + previousPage);
-        		 System.out.println("Total History: " + history.getEntries());
+        		 try{
+        			 WebHistory history = webEngine.getHistory();
+        			 String previousPage = history.getEntries().get(history.getCurrentIndex()-1).toString();
+        			 String browser = history.getEntries().get(0).toString();
+        			 webEngine.load(previousPage);
+        			 
+        			 System.out.println("Loading " + previousPage);
+        			 System.out.println("Browser is: " + browser);
+        			 System.out.println("current index is " + history.getCurrentIndex());
+        			 System.out.println("Total History: " + history.getEntries());
+        		 }
+        		 catch(ArrayIndexOutOfBoundsException error){
+        			 System.out.println("out of bounds");
+        		 }
         	 }
          });
          
@@ -295,8 +303,6 @@ public class Controller {
          stage.setScene(scene);
          stage.show();
          System.out.println("Done!");
-		
-		
 	}
 	
 	private Hyperlink createHyperlink(final String url){
