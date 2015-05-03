@@ -74,14 +74,6 @@ public class ParserTests {
     }
 
     @Test
-    public void testDatabaseConnect() {
-        item = parse(kindle.url);
-        checkItem(kindle);
-        manager.addItem(item);
-        checkItem(manager.getMostRecent(item));
-    }
-
-    @Test
     public void testKindle() {
         testItem(kindle, kindleFileName);
     }
