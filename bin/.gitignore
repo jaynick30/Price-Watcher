@@ -1,1 +1,18 @@
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+/URL/
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 /application/
+<<<<<<< HEAD
+=======
+/database/
+/easysql/
+/model/
+/tests/
+=======
+/model/
+/database/
+/application/
+>>>>>>> Stashed changes
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git

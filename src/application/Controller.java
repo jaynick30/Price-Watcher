@@ -2,7 +2,10 @@ package application;
 
 import URL.Parser;
 import database.Manager;
+<<<<<<< HEAD
 import database.PriceGraphMaker;
+=======
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,12 +25,17 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Item;
+<<<<<<< HEAD
 import model.Point;
 import model.PriceGraph;
 
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+=======
+
+import java.sql.SQLException;
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 
 public class Controller {
 	@FXML
@@ -60,12 +68,28 @@ public class Controller {
 	
 
 	
+	private Manager itemBase;
+	
 	@FXML
 	private void initialize(){
+<<<<<<< HEAD
 		itemBase = new Manager("Items");
 		itemBase.createTable();
 
         hideBrowser();
+=======
+		try {itemBase = new Manager("Items");}
+		catch (ClassNotFoundException e) {e.printStackTrace();}
+		catch (SQLException e) {e.printStackTrace();}
+		
+		 products.setItems(productList);
+		 prices.setItems(priceList);
+		 sites.setItems(siteList);
+		 
+		 products.setFixedCellSize(30);
+		 prices.setFixedCellSize(30);
+		 sites.setFixedCellSize(30);
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 		
 		products.setItems(productList);
 		prices.setItems(priceList);
@@ -160,6 +184,7 @@ public class Controller {
 	@FXML
 	public void addItem(){
 		String url = urlTextField.getText();
+<<<<<<< HEAD
 		Hyperlink hyper = createHyperlink(url);
         try {
             Item item = parser.parse(url);
@@ -174,8 +199,24 @@ public class Controller {
         catch (MalformedURLException e) {
             e.printStackTrace();
         }
+=======
+		hyper = createHyperlink(url);
+		Parser parser = new Parser();
+		Item item = new Item(url);
+		
+		item = parser.parse(url);
+		String newProduct = item.title;
+		String newPrice = item.price;
+		itemBase.addItem(item);
+		
+		productList.add(newProduct);
+		addPrice(newPrice);
+		siteList.add(hyper);
+		urlTextField.clear();
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 	}
 	
+<<<<<<< HEAD
 	@FXML
 	public void browserSelctionMenu(){
 		VBox bounds = new VBox();
@@ -292,6 +333,8 @@ public class Controller {
 		
 	}
 	
+=======
+>>>>>>> branch 'master' of https://github.com/shaddoxac/PriceWatcher.git
 	private Hyperlink createHyperlink(final String url){
 		Hyperlink hyper = new Hyperlink();
 		 hyper.setText(url);

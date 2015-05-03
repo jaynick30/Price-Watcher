@@ -9,6 +9,7 @@ public class Item {
 
     public Item(String url) {
     	this.url = url;
+        shipping = "0";
     }
 
     public boolean hasPrice() {return price!=null;}
