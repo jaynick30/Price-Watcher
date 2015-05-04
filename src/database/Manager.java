@@ -11,7 +11,6 @@ import model.Item;
 import java.sql.*;
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 public class Manager {
 
@@ -45,7 +44,7 @@ public class Manager {
 	
 	private void updateTable(Item item) {
 		String update = "UPDATE " + table + " SET idx = idx + 1 WHERE name = '" + item.title + "' AND url = '" + item.url + "'";
-		try{statement.execute(update);}
+		try{statement.executeUpdate(update);}
 		catch (SQLException e) {
 			errorMessage = "unable to update table";
 		}
@@ -54,7 +53,7 @@ public class Manager {
 	public void addItem(Item item) {
 		updateTable(item);
 		String insert = "INSERT INTO " + table + " VALUES ('" + item.title + "', '"  + item.price + "', '" + item.shipping.isFree() + "', '" + item.url + "', 0)";
-		try{statement.execute(insert);}
+		try{statement.executeUpdate(insert);}
 		catch (SQLException e) {
 			errorMessage = "unable to add this item";
 			System.out.println(errorMessage);
@@ -64,7 +63,7 @@ public class Manager {
 	
 	public void deleteItem(Item item) {
 		String delete = "DELETE FROM " + table + " WHERE name = '" + item.title + "' AND url = '" + item.url + "'";
-		try{statement.execute(delete);}
+		try{statement.executeUpdate(delete);}
 		catch (SQLException e) {
 			errorMessage = "unable to delete item";
 			e.printStackTrace();
@@ -152,7 +151,7 @@ public class Manager {
 	
 	public void dropTable() {
 		String query = "DROP TABLE " + table;
-		try{ statement.executeQuery(query);}
+		try{ statement.executeUpdate(query);}
 		catch (SQLException e) {
 			errorMessage = "unable to drop table";
 			System.out.println(errorMessage);
