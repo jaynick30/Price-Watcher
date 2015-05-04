@@ -2,7 +2,6 @@ package application;
 
 import URL.Parser;
 import database.Manager;
-import database.PriceGraphMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,12 +21,9 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import model.Item;
-import model.Point;
-import model.PriceGraph;
 import model.StringIterator;
 
 import java.net.MalformedURLException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -66,102 +62,10 @@ public class Controller {
 	private void initialize() throws MalformedURLException{
 		itemBase = new Manager("Items");
 		itemBase.createTable();
-
         hideBrowser();
-		
-		products.setItems(productList);
-		prices.setItems(priceList);
-        sites.setItems(siteList);
-		 
-		products.setFixedCellSize(30);
-		prices.setFixedCellSize(30);
-		sites.setFixedCellSize(30);
+		initializeListViews();
         populateItems();
         updateItems();
-	}
-	
-	private void updatePrice(Item item, String change, int index){
-		HBox hbox = new HBox();
-		hbox.setAlignment(Pos.CENTER);
-		String newPrice = item.price;
-		Text text = new Text();
-		text.setText(newPrice);
-		ImageView arrow = new ImageView();
-		if(change.equals("same")){
-			Image image = new Image("file:GrayLine.png");
-			arrow.setImage(image);
-			arrow.setFitHeight(3);
-			arrow.setFitWidth(15);
-		}
-		else if(change.equals("up")){
-			Image image = new Image("file:RedArrow.png");
-			arrow.setImage(image);
-			arrow.setFitHeight(15);
-			arrow.setFitWidth(15);
-		}
-		else if(change.equals("down")){
-			Image image = new Image("file:GreenArrow.png");
-			arrow.setImage(image);
-			arrow.setFitHeight(15);
-			arrow.setFitWidth(15);
-		}
-		else{
-			throwError("That price change does not exist!");
-		}
-		hbox.getChildren().addAll(text, arrow);
-		priceList.add(index, hbox);
-		if(item.shipping.isFree() == "1") {
-			Text shipping = new Text(" + free shipping!");
-	        hbox.getChildren().add(shipping);
-	    }
-	}
-	
-	private void watchItem(String url) throws MalformedURLException{
-		try{
-			Hyperlink hyper = createHyperlink(url);
-			Parser parser = new Parser();
-			Item item = new Item(url);
-		
-			item = parser.parse(url);
-			String newProduct = item.title;
-			if (!newProduct.equals(null)){
-				String newPrice = item.price;
-				itemBase.addItem(item);
-				productList.add(newProduct);
-				addPrice(item);
-				siteList.add(hyper);
-			}
-		}
-		catch(NullPointerException e){
-			throwError("URLException");
-		}
-	}
-	
-	public void throwError(String errorType){
-			VBox bounds = new VBox();
-			bounds.setSpacing(10);
-			HBox buttonBox = new HBox();
-			buttonBox.setSpacing(20);
-			bounds.setMinSize(100, 20);
-			bounds.setAlignment(Pos.CENTER);
-			buttonBox.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(bounds, 250, 75);
-			final Stage stage = new Stage();
-			stage.setTitle("error");
-			Button okButton = new Button("Ok");
-			Button cancelButton = new Button("cancel");
-			okButton.setOnAction((e) -> {stage.close();});
-			cancelButton.setOnAction((e) -> stage.close());
-
-			Label errorMessage = new Label("Item not found");
-			
-			buttonBox.getChildren().addAll(okButton, cancelButton);
-			bounds.getChildren().addAll(errorMessage, buttonBox);
-	        VBox.setVgrow(bounds, Priority.ALWAYS);
-	        
-	        stage.setScene(scene);
-	        stage.show();
-	        System.out.println("Error thrown");
 	}
 	
 	@FXML
@@ -193,12 +97,6 @@ public class Controller {
 		stage.setTitle("Select a Browser");
 		Button amazonButton = new Button("Amazon");
 		amazonButton.setMinSize(100, 50);
-		/*
-		Button ebayButton = new Button("eBay");
-		ebayButton.setMinSize(100, 50);
-		Button newEggButton = new Button("newEgg");
-		newEggButton.setMinSize(100, 50);
-		*/
 		amazonButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -206,143 +104,66 @@ public class Controller {
 				stage.close();
 			}
         });
-		/*
-		ebayButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				createBrowser("http://www.ebay.com/");
-				stage.close();
-			}
-        });
-		newEggButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				createBrowser("http://www.newegg.com/");
-				stage.close();
-			}
-        });
-		*/
-		bounds.getChildren().addAll(amazonButton);//, ebayButton, newEggButton);
+		bounds.getChildren().addAll(amazonButton);
         VBox.setVgrow(bounds, Priority.ALWAYS);
         
         stage.setScene(scene);
         stage.show();
-		
-		
-	}
-	
-	
-	private void createBrowser(String url){
-		 VBox vbox = new VBox();
-         Scene scene = new Scene(vbox);
-         final Stage stage = new Stage();
-         stage.setTitle(url);
-         HBox buttonBox = new HBox();
-         buttonBox.setSpacing(10);
-         Button addSite = new Button("Watch this item!");
-         Button switchBrowsers = new Button("Switch Browsers");
-         Button addBrowser = new Button("Add Browser");
-         Button previous = new Button("<--");
-         buttonBox.getChildren().addAll(addSite, switchBrowsers, addBrowser);
-     
-         WebView browser = new WebView();
-	     WebEngine webEngine = browser.getEngine();
-         webEngine.load(url);
-         
-         previous.setOnAction(new EventHandler<ActionEvent>() {
-        	 @Override
-        	 public void handle(ActionEvent e) {
-        		 try{
-        			 WebHistory history = webEngine.getHistory();
-        			 String previousPage = history.getEntries().get(history.getCurrentIndex()-1).toString();
-        			 String browser = history.getEntries().get(0).toString();
-        			 webEngine.load(previousPage);
-        			 
-        			 System.out.println("Loading " + previousPage);
-        			 System.out.println("Browser is: " + browser);
-        			 System.out.println("current index is " + history.getCurrentIndex());
-        			 System.out.println("Total History: " + history.getEntries());
-        		 }
-        		 catch(ArrayIndexOutOfBoundsException error){
-        			 System.out.println("out of bounds");
-        		 }
-        	 }
-         });
-         
-         addSite.setOnAction(new EventHandler<ActionEvent>() {
-        	 @Override
-        	 public void handle(ActionEvent e) {
-        		 String currentPage = webEngine.getLocation();
-        		 System.out.println("URL is: " + currentPage);
-        		 try {
-					watchItem(currentPage);
-				} catch (MalformedURLException e1) {
-					e1.printStackTrace();
-				}
-        	 }
-         });
-         
-         switchBrowsers.setOnAction(new EventHandler<ActionEvent>() {
-        	 @Override
-        	 public void handle(ActionEvent e) {
-        		 browserSelctionMenu();
-        		 stage.close();
-        	 }
-         });
-         
-         addBrowser.setOnAction(new EventHandler<ActionEvent>() {
-        	 @Override
-        	 public void handle(ActionEvent e) {
-        		 browserSelctionMenu();
-        	 }
-         });
-         
-         vbox.getChildren().addAll(previous, buttonBox, browser);
-         VBox.setVgrow(browser, Priority.ALWAYS);
-         
-         stage.setScene(scene);
-         stage.show();
-         System.out.println("Done!");
-	}
-	
-	private Hyperlink createHyperlink(final String url){
-		Hyperlink hyper = new Hyperlink();
-		 hyper.setText(url);
-		 hyper.setOnAction(new EventHandler<ActionEvent>() {
-             @Override
-             public void handle(ActionEvent e) {
-                 createBrowser(url);
-             }
-         });
-		 return hyper;
 	}
 
-    private void addItem(Item item) {
-        if (!item.title.equals(null)){
-            String newPrice = item.price;
-            itemBase.addItem(item);
-            productList.add(item.title);
-            addPrice(item);
+    @FXML
+    public void manualUpdate() throws MalformedURLException{
+        updateItems();
+    }
+
+    private void updatePrice(Item item, String change, int index){
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+        Text text = new Text();
+        text.setText(item.price);
+        ImageView arrow = new ImageView();
+        arrow.setFitHeight(15);
+        arrow.setFitWidth(15);
+        if(change.equals("same")){
+            Image image = new Image("file:GrayLine.png");
+            arrow.setImage(image);
+            arrow.setFitHeight(3);
+        }
+        else if(change.equals("up")){
+            Image image = new Image("file:RedArrow.png");
+            arrow.setImage(image);
+        }
+        else if(change.equals("down")){
+            Image image = new Image("file:GreenArrow.png");
+            arrow.setImage(image);
+        }
+        else{
+            throwError("That price change does not exist!");
+        }
+        hbox.getChildren().addAll(text, arrow);
+        priceList.add(index, hbox);
+        if(item.shipping.isFree() == "1") {
+            Text shipping = new Text(" + free shipping!");
+            hbox.getChildren().add(shipping);
         }
     }
-	
-	private void update() throws SQLException {
-		for (int i = 0; i < items.size(); i++) {
-			Item update = itemBase.getMostRecent(items.get(i));
-			items.set(i, update);
-		}
-	}
-	
-	private void drawPriceGraph(Item item) {
-		PriceGraphMaker maker = new PriceGraphMaker();
-		try{
-			PriceGraph graph = maker.makePriceGraph(item);
-			ArrayList<Point> recentPoints = graph.getLastOneHundredPoints();
-			//TODO: draw recentPoints on a pane
-		}
-		catch (SQLException e) {e.printStackTrace();}
-	}
 
+    private void watchItem(String url) throws MalformedURLException{
+        try{
+            Hyperlink hyper = createHyperlink(url);
+            Parser parser = new Parser();
+            Item item = parser.parse(url);
+            if (!item.title.equals(null)){
+                itemBase.addItem(item);
+                productList.add(item.title);
+                addPrice(item);
+                siteList.add(hyper);
+            }
+        }
+        catch(NullPointerException e){
+            throwError("URLException");
+        }
+    }
 
     private void populateItems() {
         items = itemBase.getAllRecent();
@@ -355,25 +176,13 @@ public class Controller {
         }
     }
     
-    @FXML
-    public void manualUpdate() throws MalformedURLException{
-    	updateItems();
-    }
-    
-    public void updateItems() throws MalformedURLException{
+    private void updateItems() throws MalformedURLException{
     	items = itemBase.getAllRecent();
     	for(int i = 0; i < items.size(); i++){
     		Item oldItem = items.get(i);
-    		String oldPriceString = oldItem.price;
-    		oldPriceString = oldPriceString.substring(1);
-    		double oldPrice = Double.parseDouble(oldPriceString);
-    		
-    		String url = oldItem.url;
-    		Item newItem = new Item(url);
-    		newItem = parser.parse(url);
-    		String newPriceString = newItem.price;
-    		newPriceString = newPriceString.substring(1);
-    		double newPrice = Double.parseDouble(newPriceString);
+            Item newItem = parser.parse(oldItem.url);
+    		double oldPrice = getPriceFromString(oldItem.price);
+    		double newPrice = getPriceFromString(newItem.price);
     		
     		if(newPrice > oldPrice){
     			priceList.remove(i);
@@ -391,10 +200,21 @@ public class Controller {
     		else{
     			throwError("Cannot find the price!");
     		}
-    		
     	}
-    	
-    	
+    }
+
+    private double getPriceFromString(String price) {
+        String p = price.substring(1);
+        return Double.parseDouble(p);
+    }
+
+    private void initializeListViews() {
+        products.setItems(productList);
+        prices.setItems(priceList);
+        sites.setItems(siteList);
+        products.setFixedCellSize(30);
+        prices.setFixedCellSize(30);
+        sites.setFixedCellSize(30);
     }
 
     private void addPrice(Item item){
@@ -408,6 +228,112 @@ public class Controller {
             Text shipping = new Text(" + free shipping!");
             hbox.getChildren().add(shipping);
         }
+    }
+
+    private void throwError(String errorType){
+        VBox bounds = new VBox();
+        bounds.setSpacing(10);
+        HBox buttonBox = new HBox();
+        buttonBox.setSpacing(20);
+        bounds.setMinSize(100, 20);
+        bounds.setAlignment(Pos.CENTER);
+        buttonBox.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(bounds, 250, 75);
+        final Stage stage = new Stage();
+        stage.setTitle("error");
+        Button okButton = new Button("Ok");
+        Button cancelButton = new Button("cancel");
+        okButton.setOnAction((e) -> {stage.close();});
+        cancelButton.setOnAction((e) -> stage.close());
+
+        Label errorMessage = new Label("Item not found");
+
+        buttonBox.getChildren().addAll(okButton, cancelButton);
+        bounds.getChildren().addAll(errorMessage, buttonBox);
+        VBox.setVgrow(bounds, Priority.ALWAYS);
+
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Error thrown");
+    }
+
+    private void createBrowser(String url){
+        VBox vbox = new VBox();
+        Scene scene = new Scene(vbox);
+        final Stage stage = new Stage();
+        stage.setTitle(url);
+        HBox buttonBox = new HBox();
+        buttonBox.setSpacing(10);
+        Button addSite = new Button("Watch this item!");
+        Button switchBrowsers = new Button("Switch Browsers");
+        Button addBrowser = new Button("Add Browser");
+        Button previous = new Button("<--");
+        buttonBox.getChildren().addAll(addSite, switchBrowsers, addBrowser);
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        webEngine.load(url);
+
+        previous.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                try{
+                    WebHistory history = webEngine.getHistory();
+                    String previousPage = history.getEntries().get(history.getCurrentIndex()-1).toString();
+                    String browser = history.getEntries().get(0).toString();
+                    webEngine.load(previousPage);
+                }
+                catch(ArrayIndexOutOfBoundsException error){
+                    System.out.println("out of bounds");
+                }
+            }
+        });
+
+        addSite.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                String currentPage = webEngine.getLocation();
+                System.out.println("URL is: " + currentPage);
+                try {
+                    watchItem(currentPage);
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        switchBrowsers.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                browserSelctionMenu();
+                stage.close();
+            }
+        });
+
+        addBrowser.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                browserSelctionMenu();
+            }
+        });
+
+        vbox.getChildren().addAll(previous, buttonBox, browser);
+        VBox.setVgrow(browser, Priority.ALWAYS);
+
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Done!");
+    }
+
+    private Hyperlink createHyperlink(final String url){
+        Hyperlink hyper = new Hyperlink();
+        hyper.setText(url);
+        hyper.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                createBrowser(url);
+            }
+        });
+        return hyper;
     }
 
     private ImageView getImage() {

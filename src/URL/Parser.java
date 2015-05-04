@@ -26,7 +26,6 @@ public class Parser {
 
     public Item parse(String url) throws MalformedURLException {
         Document doc = connector.connect(url);
-        System.out.println(doc.toString());
         return setValues(doc, url);
     }
 
@@ -73,7 +72,6 @@ public class Parser {
 
     private void setShipping(Item item, Document doc) {
         if (getLine(doc, shippingId) != null) {
-            System.out.println("normal");
             item.setShipping(getShippingFromId(doc, shippingId));
         }
         else if (getLine(doc, altShippingId) != null) {
